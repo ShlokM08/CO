@@ -1,6 +1,6 @@
 import DICT_VALUE as l
 import Unused_bit as U
-l.op_code
+
 user=[x for x in input().split()]
 val=l.op_code["mul"]
 valueR1=l.op_code[user[1]]
