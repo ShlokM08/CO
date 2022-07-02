@@ -1,2 +1,0 @@
-print("sejal")
-print("github")
