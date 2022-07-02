@@ -1,9 +1,8 @@
 import DICT_VALUE as d
 import Unused_bit as ub
 inp=[i for i in input().split()]
-s=''
-if inp[0]=='mov' and ('$' in inp[2]):
-    s+=d.op_code['mov_I']+d.op_code[inp[1]]
+def b_mov_i(inp):
+    s=d.op_code['mov_I']+d.op_code[inp[1]]
     num=''
     for ch in inp[2]:
         if ch!='$':
@@ -18,5 +17,5 @@ if inp[0]=='mov' and ('$' in inp[2]):
     if len(num_bin)<8:
         num_bin='0'*(8-len(num_bin))+num_bin
     s+=num_bin
-print(s)
+    return s
 
