@@ -1,5 +1,11 @@
 from TYPE_A_ADD import *
 from TYPE_A_SUB import *
+from TYPE_A_AND import *
+from TYPE_A_OR import *
+from TYPE_A_XOR import *
+from TYPE_C_NOT import *
+from TYPE_F_HLT import *
+from TYPE_D_STORE import *
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
