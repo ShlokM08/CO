@@ -1,5 +1,19 @@
 from TYPE_A_ADD import *
 from TYPE_A_SUB import *
+from TYPE_B_MOVE_IM import *
+from TYPE_B_MOVE_R import *
+from TYPE_D_STORE import *
+from TypeA_MUL import *
+from TYPE_C_COMPARE import *
+from TYPE_B_RIGHTSHIFT import *
+from TYPE_A_XOR import *
+from TYPE_A_OR import *
+from TYPE_A_AND import *
+from TYPE_C_NOT import *
+from TYPE_C_COMPARE import *
+from TYPE_E_JUMPIFL import *
+from TYPE_F_HLT import *
+
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
