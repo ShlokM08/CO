@@ -4,7 +4,7 @@ import Unused_bit as U
 #add R1 R2 R3
 #opcode=5bits unused=3bits reg1=3bits reg2=3bits reg3=3bits
 
-def add(to_read):
+def A_add(to_read):
     binary_encoding=""
     if to_read[0]=="add":
         binary_encoding=value.op_code["add"]
