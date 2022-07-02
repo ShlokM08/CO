@@ -28,7 +28,8 @@ def integertobinary(x):
 
 
 user=[x for x in input().split()]
-val=l.op_code["jgt"]
-x = int(user[1])
-s = integertobinary(x)
-print(val+U.unused["E"]+s)
+def e_unconditionaljump(user): 
+ val=l.op_code["jgt"]
+ x = int(user[1])
+ s = integertobinary(x)
+ return (val+U.unused["E"]+s)
