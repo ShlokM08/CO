@@ -3,7 +3,7 @@ import Unused_bit as U
 
 user=[x for x in input().split()]
 
-def b_leftshift(user):
+def B_leftshift(user):
     
     val=l.op_code["ls"]
     valueR1=l.op_code[user[1]]
