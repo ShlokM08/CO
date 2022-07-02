@@ -3,7 +3,7 @@ from TYPE_A_SUB import *
 from TYPE_B_MOVE_IM import *
 from TYPE_B_MOVE_R import *
 from TYPE_D_STORE import *
-from TypeA_MUL import *
+#from TypeA_MUL import *
 from TYPE_C_COMPARE import *
 from TYPE_B_RIGHTSHIFT import *
 from TYPE_A_XOR import *
@@ -40,7 +40,9 @@ for j in L:
         print(A_add(j))
     elif j[0]=="sub":
         print(A_sub(j))
-    elif j[0]=="and":
+    elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
+        print(C_move_R(j))
+    '''elif j[0]=="and":
         print(A_and(j))
     elif j[0]=="or":
         print(A_or(j))
@@ -55,4 +57,4 @@ for j in L:
     elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
         print(C_move_R(j))
     elif j[0]=="div":
-        print(C_div(j))
+        print(C_div(j))'''
