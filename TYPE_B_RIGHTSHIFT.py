@@ -13,13 +13,12 @@ x = bnr[::-1] #this reverses an array
 while len(x) < 8:
     x += '0'
 bnr = x[::-1]'''
-
+#to_encode=[x for x in input().split()]
 def B_rs(to_encode):
     x=to_encode[2].split("$")
-    a=int(x[1])
-    #print(a)
-    bnr = bin(a).replace('0b','')
-
+    '''a=int(x[1])
+    print(a)'''
+    bnr = bin(int(x[1])).replace('0b','')
     x = bnr[::-1] #this reverses an array
     while len(x) < 8:
         x += '0'
@@ -29,4 +28,4 @@ def B_rs(to_encode):
         binary_encoding=value.op_code["rs"]
     binary_encoding+=value.op_code[to_encode[1]]+bnr
     print(binary_encoding)
-#rs(to_encode)
+#B_rs(to_encode)

@@ -1,7 +1,7 @@
 import DICT_VALUE as value
 import Unused_bit as U
 #div R1 R2 R3
-to_encode=[x for x in input().split()]
+#to_encode=[x for x in input().split()]
 def C_div(to_encode):
     binary_encoding=""
     if to_encode[0]=="div":
