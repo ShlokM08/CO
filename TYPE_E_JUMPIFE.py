@@ -28,7 +28,7 @@ def integertobinary(x):
 
 
 user=[x for x in input().split()]
-def e_jumpife(user):
+def E_jumpife(user):
  val=l.op_code["jgt"]
  x = int(user[1])
  s = integertobinary(x)
