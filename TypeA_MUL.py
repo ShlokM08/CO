@@ -1,7 +1,7 @@
 import DICT_VALUE as l
 import Unused_bit as U
 
-def a_mul(user):
+def A_mul(user):
   
   val=l.op_code["mul"]
   valueR1=l.op_code[user[1]]
