@@ -12,4 +12,4 @@ def F_hlt(to_encode):
         binary_encoding=value.op_code["hlt"]
     binary_encoding+=x
     print(binary_encoding)
-#hlt(to_encode)
+#\hlt(to_encode)
