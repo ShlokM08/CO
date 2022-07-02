@@ -29,8 +29,9 @@ def integertobinary(x):
 
 
 user=[x for x in input().split()]
-val=l.op_code["ld"]
-valueR1=l.op_code[user[1]]
-x = int(user[2])
-s = integertobinary(x)
-print(val+valueR1+s)
+def d_load(user):
+ val=l.op_code["ld"]
+ valueR1=l.op_code[user[1]]
+ x = int(user[2])
+ s = integertobinary(x)
+ return(val+valueR1+s)
