@@ -1,9 +1,8 @@
 import DICT_VALUE as l
 import Unused_bit as U
 
-def mul():
+def a_mul(user):
   
-  user=[x for x in input().split()]
   val=l.op_code["mul"]
   valueR1=l.op_code[user[1]]
   valueR2=l.op_code[user[2]]
