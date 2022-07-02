@@ -1,6 +1,6 @@
 import DICT_VALUE as d
 import Unused_bit as U
-def store(inp):
+def D_store(inp):
     with open("TO_READ.txt") as f:
         file_read=f.read().split('\n')
         for i in range(len(file_read)):

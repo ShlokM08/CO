@@ -1,4 +1,5 @@
 import TYPE_B_MOVE_IM as mov_i
+import TYPE_B_MOVE_R as mov_r
 with open('STDIN.txt', 'w') as f:
     while True:
         instr=input()
@@ -13,4 +14,6 @@ with open("STDIN.txt") as f:
         to_read=to_read.split()
         if to_read[0]=='mov':
             if '$' in to_read[2]:
-                l.append(mov_i)
+                l.append(mov_i.b_mov_i(to_read))
+            else:
+                l.append(mov_r)
