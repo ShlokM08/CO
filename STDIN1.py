@@ -87,7 +87,7 @@ for j in l:
     elif j[0]=="div":
         C_div(j)
     elif j[0]=="hlt":
-        print(F_hlt(j))
+        F_hlt(j)
     elif j[0]=="rs":
         B_rs(j)
     elif j[0]=="mov":
