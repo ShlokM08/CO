@@ -38,12 +38,15 @@ for i in asii:
     L.append(i)
 #print(L)
 l=[]
+num_of_var=0
 for j in L:
     if j!=[]:
         l.append(j)
     #print(l)
 lst=[]
 for j in l:
+    if j[0]=="var":
+        num_of_var+=1
     #print(j[0])
     if j[0]=="add":
         print(A_add(j))
