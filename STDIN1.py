@@ -19,40 +19,6 @@ from TYPE_E_UNCONDITIONALJUMP import E_u_jump
 from TYPE_E_JUMPIFG import E_jumpifg
 from TYPE_E_JUMPIFE import E_jumpife
 
-'''from TYPE_B_MOVE_IM import *
-from TYPE_B_MOVE_R import *
-from TYPE_D_STORE import *
-#from TypeA_MUL import *
-from TYPE_C_COMPARE import *
-from TYPE_B_RIGHTSHIFT import *
-from TYPE_A_XOR import *
-from TYPE_A_OR import *
-from TYPE_A_AND import *
-from TYPE_C_NOT import *
-from TYPE_C_COMPARE import *
-from TYPE_E_JUMPIFL import *
-from TYPE_F_HLT import *
-
-from TYPE_A_AND import *
-from TYPE_A_OR import *
-from TYPE_A_XOR import *
-from TYPE_C_NOT import *
-from TYPE_F_HLT import *
-from TYPE_D_STORE import *
-from TYPE_B_RIGHTSHIFT import *
-from TYPE_B_MOVE_R import *
-from TYPE_C_DIV import *'''
-
-
-
-'''add R1 R2 R3
-sub R1 R2 R3
-not R1 R2
-and R1 R2 R3
-or R1 R2 R3
-xor R1 R2 R3
-rs R1 $10
-div R3 R4'''
 
 file=open("TO_READ.txt","r")
 asi=[]
@@ -70,6 +36,7 @@ l=[]
 for j in L:
     if j!=[]:
         l.append(j)
+    #print(l)
 for j in l:
     #print(j[0])
     if j[0]=="add":
