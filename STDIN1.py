@@ -30,7 +30,7 @@ asii=[]
 for line in asi:
     if line!='':
         asii.append(line)
-print("LENTGH",len(asii))
+#print("LENTGH",len(asii))
 c=0
 for i in asii:
     i=i.split()
@@ -48,7 +48,11 @@ var_list=[]
 for j in l:
     if j[0]=="var":
         var_list.append(j[1])
+    
         num_of_var+=1
+
+    #print(var_list)
+
     #print(j[0])
     if j[0]=="add":
         print(A_add(j))
@@ -194,13 +198,18 @@ for j in l:
             lst.append(x)
         else:
             print(f'Error; Variable {j[1]} not defined')
-    if j[0]=="var":
+    #if j[0]=="var":
         #print(i)
-        print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var))
-    '''for i in range(-1,len(var_list)):
-        print("Reverse",var_list[i])'''   
-#print("variables:",num_of_var)
+        
+        #print(j[1])
+print("VAR",num_of_var)
+print("VAR LIST",var_list)
+    #print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var,var_list))
+
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
         line=line+'\n'
         f.write(line)  
+#print(var_list)
+#var_list.reverse()
+#print(var_list)
