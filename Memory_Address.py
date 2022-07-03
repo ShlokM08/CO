@@ -1,4 +1,4 @@
-var_list=['abc', 'yoo', 'tyi']
+#var_list=['abc', 'yoo', 'tyi']
 def mem_add(total_lines,number_of_var,var_list):
     for i in range(0,len(var_list)):
         var_mem_address=var_list[i]
@@ -9,4 +9,4 @@ def mem_add(total_lines,number_of_var,var_list):
         return var_mem_address
     #
 
-print(mem_add(7,4,var_list))
+#print(mem_add(7,4,var_list))
