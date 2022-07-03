@@ -83,17 +83,33 @@ for j in l:
         x=F_hlt(j)
         lst.append(x)
     elif j[0]=="rs":
-        print(B_rs(j))
-        x=B_rs(j)
-        lst.append(x)
+        num=''
+        for ch in j[2]:
+            if ch!='$':
+                num+=ch
+        num=int(num)
+        if num<256:
+            print(B_rs(j))
+            x=B_rs(j)
+            lst.append(x)
+        else: print('Error: Illegal immediate Value')
     elif j[0]=="mov":
         if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[2]=="FLAGS":
             print(C_move_R(j))
             x=C_move_R(j)
+            lst.append(x)
         elif '$' in j[2]:
-            print(B_mov_i(j))
-            x=B_mov_i(j)
-        lst.append(x)
+            num=''
+            for ch in j[2]:
+                if ch!='$':
+                    num+=ch
+            num=int(num)
+            if num<256:
+                print(B_mov_i(j))
+                x=B_mov_i(j)
+                lst.append(x)
+            else: print('Error: Illegal Immediate Value')
+        
     elif j[0]=='st':
         found=0
         for ch in L:
@@ -119,9 +135,16 @@ for j in l:
         x=E_jump_less(j)
         lst.append(x)
     elif j[0]=='ls':
-        print(B_leftshift(j))
-        x=B_leftshift(j)
-        lst.append(x)
+        num=''
+        for ch in j[2]:
+            if ch!='$':
+                num+=ch
+        num=int(num)
+        if num<256:
+            print(B_leftshift(j))
+            x=B_leftshift(j)
+            lst.append(x)
+        else: print('Error: Illegal Immediate Value')
     elif j[0]=='ld':
         found=0
         for ch in L:
