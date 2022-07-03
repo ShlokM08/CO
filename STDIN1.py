@@ -59,37 +59,47 @@ for variable in var_list:
     #print(var_list)
 
     #print(j[0])
+if ["hlt"] not in l:
+    print("Missing HLT insturction")
 for j in l:
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+    
     else:
         if j[0] in type_A:
-            if j[0]=="add":
-                print(A_add(j))
-                x=A_add(j)
-                lst.append(x)
-            elif j[0]=="sub":
-                print(A_sub(j))
-                x=A_sub(j)
-                lst.append(x)
-            elif j[0]=="mul":
-                print(A_mul(j))
-                x=A_mul(j)
-                lst.append(x)
-            elif j[0]=="xor":
-                print(A_xor(j))
-                x=A_xor(j)
-                lst.append(x)
-            elif j[0]=="and":
-                print(A_and(j))
-                x=A_and(j)
-                lst.append(x)
-            elif j[0]=="or":
-                print(A_or(j))
-                x=A_or(j)
-                lst.append(x)
-        elif j[0] in type_B:
-            if j[0]=="mov":
+            if j[1] and j[2] and j[3] not in reg:
+                print(f'ERROR:Incorrect value of register in line {l.index(j)+1}')
+            else:
+                if j[0]=="add":
+                        print(A_add(j))
+                        x=A_add(j)
+                        lst.append(x)
+                elif j[0]=="sub":
+                        print(A_sub(j))
+                        x=A_sub(j)
+                        lst.append(x)
+                elif j[0]=="mul":
+                    print(A_mul(j))
+                    x=A_mul(j)
+                    lst.append(x)
+                elif j[0]=="xor":
+                    print(A_xor(j))
+                    x=A_xor(j)
+                    lst.append(x)
+                elif j[0]=="and":
+                    print(A_and(j))
+                    x=A_and(j)
+                    lst.append(x)
+                elif j[0]=="or":
+                    print(A_or(j))
+                    x=A_or(j)
+                    lst.append(x)
+        elif j[0] in type_B and '$' in j[2]:
+            if j[1] not in reg:
+                print(f'ERROR:Incorrect value of register in line {l.index(j)+1}')
+            elif j[1]=="FLAGS":
+                print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+            elif j[0]=="mov" :
                 #print(keypresent(j))
                 if '$' in j[2]:
                     num=''
@@ -126,7 +136,8 @@ for j in l:
                 else: print('Error: Illegal Immediate Value')
         elif j[0] in type_C:
             if j[0]=="mov":
-                if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[1]=="FLAGS" and j[2]!="FLAGS":
+                if j[2] in reg and j[2]!="FLAGS" and j[1] in reg:
+                #if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[1]=="R0"or j[1]=="R1" or j[1]=="R2" or j[1]=="R3" or j[1]=="R4" or j[1]=="R5" or j[1]=="R6" or j[1]=="FLAGS" and j[2]!="FLAGS":
                     print(C_move_R(j))
                     x=C_move_R(j)
                     lst.append(x)

@@ -10,3 +10,5 @@ type_C=["mov","div","not","cmp"]
 type_D=["ld","st"]
 type_E=["jmp","jlt","jgt","je"]
 type_F=["hlt"]
+
+reg=["R0","R1","R2","R3","R4","R5","R6","FLAGS"]

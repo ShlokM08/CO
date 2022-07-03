@@ -1,1 +1,2 @@
-1000000001010011
+Error: Undefined Register
+0101000000000000
