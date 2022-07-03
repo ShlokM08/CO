@@ -90,9 +90,17 @@ for j in l:
             x=B_mov_i(j)
         lst.append(x)
     elif j[0]=='st':
-        print(D_store(j))
-        x=D_store(j)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[2]:
+                    found=1
+                    break
+        if found:
+            print(D_store(j))
+            x=D_store(j)
+            lst.append(x)
+        else: print(f"Error: Variable {j[2]} not defined")
     elif j[0]=='mul':
         print(A_mul(j))
         x=A_mul(j)
@@ -110,21 +118,54 @@ for j in l:
         x=B_leftshift(j)
         lst.append(x)
     elif j[0]=='ld':
-        print(D_load(j))
-        x=D_load(j)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[2]:
+                    found=1
+                    break
+        if found:
+            print(D_load(j))
+            x=D_load(j)
+            lst.append(x)
+        else: print(f'Error: Variable {j[2]} not defined')
     elif j[0]=='jmp':
-        print(E_u_jump(j))
-        x=E_u_jump(j)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[1]:
+                    found=1
+                    break
+        if found:
+            print(E_u_jump(j))
+            x=E_u_jump(j)
+            lst.append(x)
+        else: print(f'Error: Variable {j[1]} not defined')
     elif j[0]=='jgt':
-        print(E_jumpifg(j))
-        x=E_jumpifg(j)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[1]:
+                    found=1
+                    break
+        if found:
+            print(E_jumpifg(j))
+            x=E_jumpifg(j)
+            lst.append(x)
+        else: print(f'Error: Variable {j[1]} not defined')
     elif j[0]=='je':
-        print(E_jumpife(j))
-        x=E_jumpife(j)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[1]:
+                    found=1
+                    break
+        if found:
+            print(E_jumpife(j))
+            x=E_jumpife(j)
+            lst.append(x)
+        else:
+            print(f'Error; Variable {j[1]} not defined')
 
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
