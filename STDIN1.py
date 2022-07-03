@@ -82,7 +82,7 @@ for j in L:
         C_div(j)
     elif j[0]=="hlt":
         print(F_hlt(j))
-    elif B_rs(j)=="rs":
+    elif j[0]=="rs":
         B_rs(j)
     elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
         C_move_R(j)
