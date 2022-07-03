@@ -45,15 +45,23 @@ for j in L:
     #print(l)
 lst=[]
 var_list=[]
+dict={}
+var_start=len(asii)-num_of_var
 for j in l:
     if j[0]=="var":
         var_list.append(j[1])
     
         num_of_var+=1
+for variable in var_list:
+    dict[variable]=format(var_start,"08b")
+    var_start+=1
+print(dict)
+
 
     #print(var_list)
 
     #print(j[0])
+for j in l:
     if j[0]=="add":
         print(A_add(j))
         x=A_add(j)
@@ -122,7 +130,7 @@ for j in l:
                     found=1
                     break
         if found:
-            print(D_store(j))
+            print(D_store(j, dict))
             x=D_store(j)
             lst.append(x)
         else: print(f"Error: Variable {j[2]} not defined")
@@ -205,12 +213,6 @@ for j in l:
 '''print("VAR",num_of_var)
 print("VAR LIST",var_list)
 print("Lenght of asii",len(asii))'''
-dict={}
-var_start=len(asii)-num_of_var
-for variable in var_list:
-    dict[variable]=format(var_start,"08b")
-    var_start+=1
-print(dict)
     
     #print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var,var_list))
 
