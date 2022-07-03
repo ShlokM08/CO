@@ -1,6 +1,5 @@
 import DICT_VALUE as d
 import Unused_bit as ub
-inp=[i for i in input().split()]
 def B_mov_i(inp):
     s=d.op_code['mov_I']+d.op_code[inp[1]]
     num=''
