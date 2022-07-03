@@ -26,11 +26,14 @@ def integertobinary(x):
     s = temp + s
     return(s)
 
-
-
-user=[x for x in input().split()]
-val=l.op_code["ld"]
-valueR1=l.op_code[user[1]]
-x = int(user[2])
-s = integertobinary(x)
-print(val+valueR1+s)
+def E_u_jump(user): 
+ val=l.op_code["jgt"]
+ with open("TO_READ.txt") as f:
+        file_read=f.read().split('\n')
+        for i in range(len(file_read)):
+            if user[2] in file_read[i]:
+                i+=1
+                break
+        num=len(file_read)-i
+ s = integertobinary(num)
+ return (val+U.unused["E"]+s)

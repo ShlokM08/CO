@@ -1,12 +1,13 @@
 import DICT_VALUE as value
 import Unused_bit as U
+#import STDIN as stdin
 #add R1 R2 R3
 #opcode=5bits unused=3bits reg1=3bits reg2=3bits reg3=3bits
-to_encode=[x for x in input().split()]
-def add(to_encode):
+
+def A_add(to_read):
     binary_encoding=""
-    if to_encode[0]=="add":
+    if to_read[0]=="add":
         binary_encoding=value.op_code["add"]
-    binary_encoding+=U.unused["A"]+value.op_code[to_encode[1]]+value.op_code[to_encode[2]]+value.op_code[to_encode[3]]
-    print(binary_encoding)
-add(to_encode)
+    binary_encoding+=U.unused["A"]+value.op_code[to_read[1]]+value.op_code[to_read[2]]+value.op_code[to_read[3]]
+    return binary_encoding
+#add()

@@ -1,0 +1,5 @@
+var abc
+var yoo
+var tyi
+mov FLAGS R0
+hlt
