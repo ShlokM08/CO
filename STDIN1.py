@@ -114,11 +114,3 @@ for j in l:
     elif j[0]=='je':
         print(E_jumpife(j))
         
-    '''    else:
-        print("DONE")'''
-    '''elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
-        print(C_move_R(j))
-    elif j[0]=="div":
-        print(C_div(j))'''
-    '''else:
-    print("Error")'''
