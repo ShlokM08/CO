@@ -64,7 +64,11 @@ for i in asi:
     c+=1
     L.append(i)
 #print(L)
+l=[]
 for j in L:
+    if j!=[]:
+        l.append(j)
+for j in l:
     #print(j[0])
     if j[0]=="add":
         A_add(j)

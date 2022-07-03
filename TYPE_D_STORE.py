@@ -7,7 +7,7 @@ def D_store(inp):
             if inp[2] in file_read[i]:
                 i+=1
                 break
-    num=len(file_read)-i
+    num=len(file_read)-i-1
     mem_addr=''
     while num:
         r=num%2
