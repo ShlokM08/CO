@@ -130,7 +130,7 @@ for j in l:
                     break
         if found:
             print(D_store(j, dict))
-            x=D_store(j)
+            x=D_store(j,dict)
             lst.append(x)
         else: print(f"Error: Variable {j[2]} not defined")
     elif j[0]=='mul':
