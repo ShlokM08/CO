@@ -6,9 +6,11 @@ rs R1 $10
 xor R1 R2 R3
 and R1 R2 R3
 mov R1 $10
-mov R2 $100
 mul R3 R1 R2
-st R3 X
+ls R1 S100
+not R1 R2
+cmp R1 R2
+sub R1 R2 R3
 hlt
 
 
