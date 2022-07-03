@@ -202,8 +202,16 @@ for j in l:
         #print(i)
         
         #print(j[1])
-print("VAR",num_of_var)
+'''print("VAR",num_of_var)
 print("VAR LIST",var_list)
+print("Lenght of asii",len(asii))'''
+dict={}
+var_start=len(asii)-num_of_var
+for variable in var_list:
+    dict[variable]=var_start
+    var_start+=1
+print(dict)
+    
     #print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var,var_list))
 
 with open('OUTPUT.TXT', 'w') as f:
