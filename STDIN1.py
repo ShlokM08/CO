@@ -84,10 +84,11 @@ for j in L:
         print(F_hlt(j))
     elif j[0]=="rs":
         B_rs(j)
-    elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
-        C_move_R(j)
-    elif j[0]=='mov' and '$' in j[2]:
-        print(B_mov_i(j))
+    elif j[0]=="mov":
+        if j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
+            C_move_R(j)
+        elif '$' in j[2]:
+            print(B_mov_i(j))
     elif j[0]=='st':
         print(D_store(j))
     elif j[0]=='mul':
