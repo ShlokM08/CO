@@ -30,6 +30,7 @@ asii=[]
 for line in asi:
     if line!='':
         asii.append(line)
+#print("LENTGH",len(asii))
 c=0
 for i in asii:
     i=i.split()
@@ -44,26 +45,26 @@ for j in L:
 for j in l:
     #print(j[0])
     if j[0]=="add":
-        A_add(j)
+        print(A_add(j))
     elif j[0]=="sub":
         print(A_sub(j))
     elif j[0]=="not":
-        C_not(j)
+        print(C_not(j))
     elif j[0]=="and":
-        A_and(j)
+        print(A_and(j))
     elif j[0]=="or":
         print(A_or(j))
     elif j[0]=="xor":
-        A_xor(j)
+        print(A_xor(j))
     elif j[0]=="div":
-        C_div(j)
+        print(C_div(j))
     elif j[0]=="hlt":
-        F_hlt(j)
+        print(F_hlt(j))
     elif j[0]=="rs":
-        B_rs(j)
+        print(B_rs(j))
     elif j[0]=="mov":
         if j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
-            C_move_R(j)
+            print(C_move_R(j))
         elif '$' in j[2]:
             print(B_mov_i(j))
     elif j[0]=='st':

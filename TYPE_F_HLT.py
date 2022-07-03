@@ -11,5 +11,5 @@ def F_hlt(to_encode):
     if to_encode[0]=="hlt":
         binary_encoding=value.op_code["hlt"]
     binary_encoding+=x
-    print(binary_encoding)
+    return binary_encoding
 #\hlt(to_encode)

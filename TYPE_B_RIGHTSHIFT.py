@@ -28,7 +28,7 @@ def B_rs(to_encode):
         if to_encode[0]=="rs":
                 binary_encoding=value.op_code["rs"]
         binary_encoding+=value.op_code[to_encode[1]]+bnr
-        print(binary_encoding)
+        return binary_encoding
         '''s=""
         for ch in x:
             if ch !="$":

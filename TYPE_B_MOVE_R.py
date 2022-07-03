@@ -11,4 +11,4 @@ def C_move_R(to_read):
     if to_read[0]=="mov":
         binary_encoding=value.op_code["mov_R"]
     binary_encoding+=U.unused["C"]+value.op_code[to_read[1]]+value.op_code[to_read[2]]
-    print(binary_encoding)
+    return binary_encoding

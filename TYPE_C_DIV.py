@@ -7,5 +7,5 @@ def C_div(to_encode):
     if to_encode[0]=="div":
         binary_encoding=value.op_code["div"]
     binary_encoding+=U.unused["C"]+value.op_code[to_encode[1]]+value.op_code[to_encode[2]]
-    print(binary_encoding)
+    return binary_encoding
 #div(to_encode)

@@ -6,7 +6,7 @@ def C_not(inp):
     if inp[0]=="not":
         s=d.op_code["not"]
     s+=ub.unused['C']+d.op_code[inp[1]]+d.op_code[inp[2]]
-    print(s)
+    return s 
 #C_not(inp)
 
 '''binary_encoding=""

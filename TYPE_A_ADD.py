@@ -9,5 +9,5 @@ def A_add(to_read):
     if to_read[0]=="add":
         binary_encoding=value.op_code["add"]
     binary_encoding+=U.unused["A"]+value.op_code[to_read[1]]+value.op_code[to_read[2]]+value.op_code[to_read[3]]
-    print(binary_encoding)
+    return binary_encoding
 #add()

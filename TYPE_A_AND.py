@@ -8,5 +8,5 @@ def A_and(to_encode):
     if to_encode[0]=="and":
         binary_encoding=value.op_code["and"]
     binary_encoding+=U.unused["A"]+value.op_code[to_encode[1]]+value.op_code[to_encode[2]]+value.op_code[to_encode[3]]
-    print(binary_encoding)
+    return binary_encoding
 #and_(to_encode)
