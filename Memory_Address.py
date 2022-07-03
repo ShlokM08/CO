@@ -5,8 +5,8 @@ def mem_add(total_lines,number_of_var,var_list):
         #print(var_mem_address)
         var_mem_address=total_lines-number_of_var
         
-        total_lines+=1
-        return var_mem_address
+        total_lines+=7
+        return var_mem_address 
     #
 
 #print(mem_add(7,4,var_list))
