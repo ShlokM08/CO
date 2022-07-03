@@ -4,4 +4,5 @@ var c
 var xy
 add R1 R2 R3
 mov FLAGS R0
+st R1 a
 hlt
