@@ -130,7 +130,7 @@ for j in l:
                     break
         if found:
             print(D_store(j, dict))
-            x=D_store(j)
+            x=D_store(j,dict)
             lst.append(x)
         else: print(f"Error: Variable {j[2]} not defined")
     elif j[0]=='mul':
@@ -142,9 +142,17 @@ for j in l:
         x=C_compare(j)
         lst.append(x)
     elif j[0]=='jlt':
-        print(E_jump_less(j))
-        x=E_jump_less(j,dict)
-        lst.append(x)
+        found=0
+        for ch in L:
+            if ch[0]=='var':
+                if ch[1]==j[1]:
+                    found=1
+                    break
+        if found:
+            print(E_jump_less(j,dict))
+            x=E_jump_less(j,dict)
+            lst.append(x)
+        else: print(f'Error: Variable {j[1]} is not defined')
     elif j[0]=='ls':
         num=''
         for ch in j[2]:
@@ -165,7 +173,7 @@ for j in l:
                     break
         if found:
             print(D_load(j,dict))
-            x=D_load(j)
+            x=D_load(j,dict)
             lst.append(x)
         else: print(f'Error: Variable {j[2]} not defined')
     elif j[0]=='jmp':
@@ -177,7 +185,7 @@ for j in l:
                     break
         if found:
             print(E_u_jump(j,dict))
-            x=E_u_jump(j)
+            x=E_u_jump(j,dict)
             lst.append(x)
         else: print(f'Error: Variable {j[1]} not defined')
     elif j[0]=='jgt':
@@ -188,7 +196,7 @@ for j in l:
                     found=1
                     break
         if found:
-            print(E_jumpifg(j))
+            print(E_jumpifg(j,dict))
             x=E_jumpifg(j,dict)
             lst.append(x)
         else: print(f'Error: Variable {j[1]} not defined')
@@ -200,7 +208,7 @@ for j in l:
                     found=1
                     break
         if found:
-            print(E_jumpife(j))
+            print(E_jumpife(j,dict))
             x=E_jumpife(j,dict)
             lst.append(x)
         else:
