@@ -31,7 +31,7 @@ for line in asi:
     if line!='':
         asii.append(line)
 c=0
-for i in asi:
+for i in asii:
     i=i.split()
     c+=1
     L.append(i)
