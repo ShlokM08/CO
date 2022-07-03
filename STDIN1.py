@@ -13,9 +13,11 @@ from TYPE_C_DIV import *
 from TYPE_D_STORE import D_store
 from TYPE_E_JUMPIFL import E_jump_less
 from TYPE_F_HLT import *
-
-
-
+from TYPE_D_LOAD import D_load
+from TYPE_B_LEFTSHIFT import B_leftshift
+from TYPE_E_UNCONDITIONALJUMP import E_u_jump
+from TYPE_E_JUMPIFG import E_jumpifg
+from TYPE_E_JUMPIFE import E_jumpife
 
 '''from TYPE_B_MOVE_IM import *
 from TYPE_B_MOVE_R import *
@@ -101,7 +103,17 @@ for j in l:
         print(C_compare(j))
     elif j[0]=='jlt':
         print(E_jump_less(j))
-
+    elif j[0]=='ls':
+        print(B_leftshift(j))
+    elif j[0]=='ld':
+        print(D_load(j))
+    elif j[0]=='jmp':
+        print(E_u_jump(j))
+    elif j[0]=='jgt':
+        print(E_jumpifg(j))
+    elif j[0]=='je':
+        print(E_jumpife(j))
+        
     '''    else:
         print("DONE")'''
     '''elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
