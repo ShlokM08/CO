@@ -1,11 +1,3 @@
-var a
-var b
-var c
-var xy
-st R1 a
-ld R1 b
-jmp a
-jlt a
-jgt b
-je c
+mov R1 $10
 hlt
+mov FLAGS R3
