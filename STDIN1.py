@@ -41,6 +41,7 @@ for j in L:
     if j!=[]:
         l.append(j)
     #print(l)
+lst=[]
 for j in l:
     #print(j[0])
     if j[0]=="add":
