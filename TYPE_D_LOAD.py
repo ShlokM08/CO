@@ -28,10 +28,15 @@ def integertobinary(x):
 
 
 
-user=[x for x in input().split()]
 def D_load(user):
- val=l.op_code["ld"]
- valueR1=l.op_code[user[1]]
- x = int(user[2])
- s = integertobinary(x)
- return(val+valueR1+s)
+    val=l.op_code["ld"]
+    valueR1=l.op_code[user[1]]
+    with open("TO_READ.txt") as f:
+        file_read=f.read().split('\n')
+        for i in range(len(file_read)):
+            if user[2] in file_read[i]:
+                i+=1
+                break
+        num=len(file_read)-i
+    s = integertobinary(num)
+    return(val+valueR1+s)
