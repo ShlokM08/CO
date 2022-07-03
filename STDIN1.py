@@ -26,6 +26,10 @@ L=[]
 for line in file:
     asi.append(line.rstrip())
 #print (asi)
+asii=[]
+for line in asi:
+    if line!='':
+        asii.append(line)
 c=0
 for i in asi:
     i=i.split()
