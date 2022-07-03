@@ -1,11 +1,5 @@
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
+var abc
+var yoo
+var tyi
+mov FLAGS R0
 hlt

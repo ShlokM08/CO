@@ -18,7 +18,7 @@ from TYPE_B_LEFTSHIFT import B_leftshift
 from TYPE_E_UNCONDITIONALJUMP import E_u_jump
 from TYPE_E_JUMPIFG import E_jumpifg
 from TYPE_E_JUMPIFE import E_jumpife
-
+from Memory_Address import mem_add
 
 file=open("TO_READ.txt","r")
 asi=[]
@@ -30,7 +30,7 @@ asii=[]
 for line in asi:
     if line!='':
         asii.append(line)
-#print("LENTGH",len(asii))
+print("LENTGH",len(asii))
 c=0
 for i in asii:
     i=i.split()
@@ -44,8 +44,10 @@ for j in L:
         l.append(j)
     #print(l)
 lst=[]
+var_list=[]
 for j in l:
     if j[0]=="var":
+        var_list.append(j[1])
         num_of_var+=1
     #print(j[0])
     if j[0]=="add":
@@ -85,7 +87,7 @@ for j in l:
         x=B_rs(j)
         lst.append(x)
     elif j[0]=="mov":
-        if j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
+        if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[2]=="FLAGS":
             print(C_move_R(j))
             x=C_move_R(j)
         elif '$' in j[2]:
@@ -169,7 +171,12 @@ for j in l:
             lst.append(x)
         else:
             print(f'Error; Variable {j[1]} not defined')
-
+    if j[0]=="var":
+        #print(i)
+        print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var))
+    '''for i in range(-1,len(var_list)):
+        print("Reverse",var_list[i])'''   
+#print("variables:",num_of_var)
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
         line=line+'\n'
