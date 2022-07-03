@@ -48,10 +48,16 @@ def keypresent(j):
         print(B_rs(j))
         x=B_rs(j)
         lst.append(x)
-    elif j[0]=="mov":
-        print(C_move_R(j))
-        x=C_move_R(j)
-        lst.append(x)
+    elif j[0]=="mov_R":
+        if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[2]=="FLAGS":
+            print(C_move_R(j))
+            x=C_move_R(j)
+            lst.append(x)
+    elif j[0]=="mov_I":
+        if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[2]=="FLAGS":
+            print(C_mov_I(j))
+            x=C_mov_I
+            lst.append(x)
     elif j[0]=="st":
         print(D_store(j))
         x=D_store(j)
