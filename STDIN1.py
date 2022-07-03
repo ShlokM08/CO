@@ -55,7 +55,6 @@ for j in l:
 for variable in var_list:
     dict[variable]=format(var_start,"08b")
     var_start+=1
-print(dict)
 
 
     #print(var_list)
