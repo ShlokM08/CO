@@ -20,7 +20,7 @@ from TYPE_E_JUMPIFG import E_jumpifg
 from TYPE_E_JUMPIFE import E_jumpife
 #from Memory_Address import mem_add
 from DICT_VALUE import *
-from Errors import keypresent
+
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
