@@ -1,12 +1,17 @@
 from TYPE_A_ADD import *
+from TYPE_A_MUL import A_mul
 from TYPE_A_SUB import *
+from TYPE_B_MOVE_IM import B_mov_i
 from TYPE_B_MOVE_R import *
+from TYPE_C_COMPARE import C_compare
 from TYPE_C_NOT import *
 from TYPE_A_AND import *
 from TYPE_A_OR import *
 from TYPE_A_XOR import *
 from TYPE_B_RIGHTSHIFT import *
 from TYPE_C_DIV import *
+from TYPE_D_STORE import D_store
+from TYPE_E_JUMPIFL import E_jump_less
 from TYPE_F_HLT import *
 
 
@@ -81,6 +86,17 @@ for j in L:
         B_rs(j)
     elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
         C_move_R(j)
+    elif j[0]=='mov' and '$' in j[2]:
+        print(B_mov_i(j))
+    elif j[0]=='st':
+        print(D_store(j))
+    elif j[0]=='mul':
+        print(A_mul(j))
+    elif j[0]=='cmp':
+        print(C_compare(j))
+    elif j[0]=='jlt':
+        print(E_jump_less(j))
+
     '''    else:
         print("DONE")'''
     '''elif j[0]=="mov" and j[2]=="R1" or j[2]=="R2" or j[2]=="R3":
