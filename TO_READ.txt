@@ -1,5 +1,8 @@
-mul R1 R9 R3
-mov R9 $10
 var x
+var y 
+var z
+label: add R1 R2 R3
+mul R1 R2 R3
+mov R5 $10
 hlt
 

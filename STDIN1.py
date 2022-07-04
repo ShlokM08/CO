@@ -54,9 +54,10 @@ for j in l:
 for variable in var_list:
     dict[variable]=format(var_start,"08b")
     var_start+=1
+print(dict)
 
 
-
+label_value={}
 if ["hlt"] not in l:
     print("Missing HLT insturction")
 list_of_instructions=[]
@@ -70,10 +71,24 @@ for var in l:
         break
 
 for j in l:
+    #print(j)
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
     
     else:
+        j1=[]
+        for v in j:
+            x=v.split(":")
+            j1.append(x)
+        for t in j1:
+            if len(t)>1:
+                if t[1]==" ":
+                    label_num=int(l.index(j)+1)-num_of_var
+                    #print("only this",t[0])
+                    label_value[t[0]]=format(label_num,"08b")
+        
+        #l=["label:","mov r1,r2","mov r1,#10","mov r1,r2,r3"]
+
         if j[0] in type_A:
                 try:
                     if j[0]=="add":
@@ -248,177 +263,12 @@ for j in l:
                 print(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
         elif j[0][0]=="var":
             continue
-        '''else:
-            print(f"Error Invalid Instruction:{j[0]}")'''
-
-
-'''
-    if j[0]=="add":
-        print(A_add(j))
-        x=A_add(j)
-        lst.append(x)
-    elif j[0]=="sub":
-        print(A_sub(j))
-        x=A_sub(j)
-        lst.append(x)
-    elif j[0]=="not":
-        print(C_not(j))
-        x=C_not(j)
-        lst.append(x)
-    elif j[0]=="and":
-        print(A_and(j))
-        x=A_and(j)
-        lst.append(x)
-    elif j[0]=="or":
-        print(A_or(j))
-        x=A_or(j)
-        lst.append(x)
-    elif j[0]=="xor":
-        print(A_xor(j))
-        x=A_xor(j)
-        lst.append(x)
-    elif j[0]=="div":
-        print(C_div(j))
-        x=C_div(j)
-        lst.append(x)
-    elif j[0]=="hlt":
-        print(F_hlt(j))
-        x=F_hlt(j)
-        lst.append(x)
-    elif j[0]=="rs":
-        num=''
-        for ch in j[2]:
-            if ch!='$':
-                num+=ch
-        num=int(num)
-        if num<256:
-            print(B_rs(j))
-            x=B_rs(j)
-            lst.append(x)
-        else: print('Error: Illegal immediate Value')
-    elif j[0]=="mov":
-        if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[2]=="FLAGS":
-            print(C_move_R(j))
-            x=C_move_R(j)
-            lst.append(x)
-        elif '$' in j[2]:
-            num=''
-            for ch in j[2]:
-                if ch!='$':
-                    num+=ch
-            num=int(num)
-            if num<256:
-                print(B_mov_i(j))
-                x=B_mov_i(j)
-                lst.append(x)
-            else: print('Error: Illegal Immediate Value')
-        
-    elif j[0]=='st':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[2]:
-                    found=1
-                    break
-        if found:
-            print(D_store(j, dict))
-            x=D_store(j,dict)
-            lst.append(x)
-        else: print(f"Error: Variable {j[2]} not defined")
-    elif j[0]=='mul':
-        print(A_mul(j))
-        x=A_mul(j)
-        lst.append(x)
-    elif j[0]=='cmp':
-        print(C_compare(j))
-        x=C_compare(j)
-        lst.append(x)
-    elif j[0]=='jlt':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[1]:
-                    found=1
-                    break
-        if found:
-            print(E_jump_less(j,dict))
-            x=E_jump_less(j,dict)
-            lst.append(x)
-        else: print(f'Error: Variable {j[1]} is not defined')
-    elif j[0]=='ls':
-        num=''
-        for ch in j[2]:
-            if ch!='$':
-                num+=ch
-        num=int(num)
-        if num<256:
-            print(B_leftshift(j))
-            x=B_leftshift(j)
-            lst.append(x)
-        else: print('Error: Illegal Immediate Value')
-    elif j[0]=='ld':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[2]:
-                    found=1
-                    break
-        if found:
-            print(D_load(j,dict))
-            x=D_load(j,dict)
-            lst.append(x)
-        else: print(f'Error: Variable {j[2]} not defined')
-    elif j[0]=='jmp':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[1]:
-                    found=1
-                    break
-        if found:
-            print(E_u_jump(j,dict))
-            x=E_u_jump(j,dict)
-            lst.append(x)
-        else: print(f'Error: Variable {j[1]} not defined')
-    elif j[0]=='jgt':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[1]:
-                    found=1
-                    break
-        if found:
-            print(E_jumpifg(j,dict))
-            x=E_jumpifg(j,dict)
-            lst.append(x)
-        else: print(f'Error: Variable {j[1]} not defined')
-    elif j[0]=='je':
-        found=0
-        for ch in L:
-            if ch[0]=='var':
-                if ch[1]==j[1]:
-                    found=1
-                    break
-        if found:
-            print(E_jumpife(j,dict))
-            x=E_jumpife(j,dict)
-            lst.append(x)
         else:
-            print(f'Error; Variable {j[1]} not defined')
-    #if j[0]=="var":
-        #print(i)
-        
-        #print(j[1])
-print("VAR",num_of_var)
-print("VAR LIST",var_list)
-print("Lenght of asii",len(asii))
-    
-    #print(f'Memory address of {j[1]}',mem_add(int(len(asii)),num_of_var,var_list))
-'''
+            print(f"Error Invalid Instruction:{j[0]}")
+
+print(label_value)
+
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
         line=line+'\n'
         f.write(line)  
-#print(var_list)
-#var_list.reverse()
-#print(var_list)
