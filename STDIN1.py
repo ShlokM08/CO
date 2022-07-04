@@ -76,18 +76,20 @@ for j in l:
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
     
     else:
+        print("yalla",j[0])
         j1=[]
         for v in j:
             x=v.split(":")
             j1.append(x)
         for t in j1:
             if len(t)>1:
-                if t[1]==" ":
+                #print("yo",t)
+                if t[1]=="":
                     label_num=int(l.index(j)+1)-num_of_var
                     #print("only this",t[0])
                     label_value[t[0]]=format(label_num,"08b")
+                    
         
-        #l=["label:","mov r1,r2","mov r1,#10","mov r1,r2,r3"]
 
         if j[0] in type_A:
                 try:
@@ -263,11 +265,13 @@ for j in l:
                 print(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
         elif j[0][0]=="var":
             continue
+        elif j[0] in label_value.keys():
+            print("eureka",label_value.values())
         else:
             print(f"Error Invalid Instruction:{j[0]}")
 
-print(label_value)
-
+print("KEYS",label_value.keys())
+#print("fire",list_label_value)
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
         line=line+'\n'
