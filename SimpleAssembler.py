@@ -21,11 +21,13 @@ from TYPE_E_JUMPIFE import E_jumpife
 #from Memory_Address import mem_add
 from DICT_VALUE import *
 import sys
-#file=open("TO_READ.txt","r")
+file=open("TO_READ.txt","r")
 asi=[]
 L=[]
-for line in sys.stdin:
-    asi.append(line.rstrip())
+for ch in file:
+    asi.append(ch.rstrip())
+'''for line in sys.stdin:
+    asi.append(line.rstrip())'''
 #print (asi)
 asii=[]
 for line in asi:
@@ -55,8 +57,6 @@ for variable in var_list:
     dict[variable]=format(var_start,"08b")
     var_start+=1
 #print(dict)
-
-
 label_value={}
 if ["hlt"] not in l:
     print("Missing HLT insturction")
@@ -182,79 +182,156 @@ for j in l:
         elif j[0]in type_D:
                 if j[0]=="ld":
                     found=0
-                    for ch in L:
+                    for ch in l:
                         if ch[0]=='var':
                             if ch[1]==j[2]:
                                 found=1
                                 break
-                    if found:
+                    l_err=1
+                    for ch in l:
+                        if ':' in ch[0]:
+                            if j[1] in ch[0]:
+                                l_err=0
+                                break
+
+                    
+                    if found==1 and l_err==1:
                         print(D_load(j,dict))
                         x=D_load(j,dict)
                         lst.append(x)
-                    else: 
-                        print(f'Error: Variable {j[2]} not defined')
+                    else:
+                        if found==0:
+                            print(f'Error: Variable {j[2]} not defined')
+                        elif l_err==0:
+                            print('Error: Misuse of label as variable')
                 elif j[0]=="st":
                         found=0
-                        for ch in L:
+                        for ch in l:
                             if ch[0]=='var':
                                 if ch[1]==j[2]:
                                     found=1
                                     break
-                        if found:
+                        l_err=1
+                        for ch in l:
+                            if ':' in ch[0]:
+                                if j[1] in ch[0]:
+                                    l_err=0
+                                    break
+                        if found==1 and l_err==1:
                             print(D_store(j, dict))
                             x=D_store(j,dict)
                             lst.append(x)
-                        else: print(f"Error: Variable {j[2]} not defined")
+                        else: 
+                            if found==0:
+                                print(f"Error: Variable {j[2]} not defined")
+                            elif l_err==0:
+                                print('Error: Misuse of label as variable')
+                               
         elif j[0] in type_E:
             if j[0]=="jmp":
                 found=0
-                for ch in L:
+                lbl=0
+                for ch in l:
                     if ch[0]=='var':
                         if ch[1]==j[1]:
                             found=1
                             break
-                if found:
+                for ch in l:
+                    if ':' in ch[0]:
+                        if j[1] in ch[0]:
+                            lbl=1
+                            break
+                if found==1:
                     print(E_u_jump(j,dict))
                     x=E_u_jump(j,dict)
                     lst.append(x)
-                else: print(f'Error: Variable {j[1]} not defined')
+                elif lbl==1:
+                    print(E_u_jump(j,label_value))
+                    x=E_u_jump(j,label_value)
+                    lst.append(x)
+                else: 
+                    if found==0:
+                        print(f'Error: Variable {j[1]} not defined')
+                    elif lbl==0:
+                        print('Error: Label not found')
             elif j[0]=="jlt":
                 found=0
-                for ch in L:
+                lbl=0
+                for ch in l:
                     if ch[0]=='var':
                         if ch[1]==j[1]:
                             found=1
                             break
-                if found:
+                for ch in l:
+                    if ':' in ch[0]:
+                        if j[1] in ch[0]:
+                            lbl=1
+                            break
+                if found==1:
                     print(E_jump_less(j,dict))
                     x=E_jump_less(j,dict)
                     lst.append(x)
-                else: print(f'Error: Variable {j[1]} is not defined')
+                elif lbl==1:
+                    print(E_u_jump(j,label_value))
+                    x=E_u_jump(j,label_value)
+                    lst.append(x)
+                else:
+                    if found==0: 
+                        print(f'Error: Variable {j[1]} is not defined')
+                    elif lbl==0:
+                        print('Error: Label not found')
             elif j[0]=="jgt":
                 found=0
-                for ch in L:
+                lbl=0
+                for ch in l:
                     if ch[0]=='var':
                         if ch[1]==j[1]:
                             found=1
                             break
-                if found:
+                for ch in l:
+                    if ':' in ch[0]:
+                        if j[1] in ch[0]:
+                            lbl=1
+                            break
+                if found==1:
                     print(E_jumpifg(j,dict))
                     x=E_jumpifg(j,dict)
                     lst.append(x)
-                else: print(f'Error: Variable {j[1]} not defined')
+                elif lbl==1:
+                    print(E_u_jump(j,label_value))
+                    x=E_u_jump(j,label_value)
+                    lst.append(x)
+                else: 
+                    if found==0:
+                        print(f'Error: Variable {j[1]} not defined')
+                    elif lbl==0:
+                        print('Error: Label not found')
             elif j[0]=="je":
                 found=0
+                lbl=0
                 for ch in L:
                     if ch[0]=='var':
                         if ch[1]==j[1]:
                             found=1
                             break
-                if found:
+                for ch in l:
+                    if ':' in ch[0]:
+                        if j[1] in ch[0]:
+                            lbl=1
+                            break
+                if found==1:
                     print(E_jumpife(j,dict))
                     x=E_jumpife(j,dict)
                     lst.append(x)
+                elif lbl==1:
+                    print(E_u_jump(j,label_value))
+                    x=E_u_jump(j,label_value)
+                    lst.append(x)
                 else:
-                    print(f'Error; Variable {j[1]} not defined')
+                    if found==0:
+                        print(f'Error; Variable {j[1]} not defined')
+                    elif lbl==0:
+                        print('Error: Label not found')
         elif j[0] in type_F:
             if j[0]=="hlt" and "hlt" in l[len(l)-1]:
                 print(F_hlt(j))
