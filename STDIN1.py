@@ -268,7 +268,7 @@ for j in l:
             
         elif j[0] in label_value:
             continue
-        elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var" and j[0][0:lenght_of_list-1] in label_value:
+        elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var" and j[0][0:lenght_of_list-1] not in label_value:
             print(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
 
 #print("KEYS",label_value.keys())
