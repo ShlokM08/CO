@@ -75,6 +75,7 @@ for j in l:
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
     
     else:
+        #print(j)
         lenght_of_list=len(j[0])
         
         j1=[]
@@ -87,7 +88,9 @@ for j in l:
                     label_num=int(l.index(j)+1)-num_of_var
                     label_value[t[0]]=format(label_num,"08b")
                     
-        
+        if j[0][0:lenght_of_list-1]  in label_value:
+            #print("check",j[0][0:lenght_of_list-1])
+            j.pop(0)
         if j[0] in type_A:
                 try:
                     if j[0]=="add":
