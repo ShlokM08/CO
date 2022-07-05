@@ -54,7 +54,7 @@ for j in l:
 for variable in var_list:
     dict[variable]=format(var_start,"08b")
     var_start+=1
-print(dict)
+#print(dict)
 
 
 label_value={}
@@ -63,34 +63,29 @@ if ["hlt"] not in l:
 list_of_instructions=[]
 
 for var in l:
-    #print(var[0])
+    #print(var)
     c=0
-    if "var" not in var[0] and c==0:
+    if "var" not in var[0] and c>num_of_var:
         c+=1
         print("ERROR:Missing var or var not in first line")
-        break
+        
 
 for j in l:
-    #print(j)
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
     
     else:
-        print("yalla",j[0])
         j1=[]
         for v in j:
             x=v.split(":")
             j1.append(x)
         for t in j1:
             if len(t)>1:
-                #print("yo",t)
                 if t[1]=="":
                     label_num=int(l.index(j)+1)-num_of_var
-                    #print("only this",t[0])
                     label_value[t[0]]=format(label_num,"08b")
                     
         
-
         if j[0] in type_A:
                 try:
                     if j[0]=="add":
@@ -162,7 +157,6 @@ for j in l:
         elif j[0] in type_C:
             if j[0]=="mov":
                 if j[2] in reg and j[2]!="FLAGS" and j[1] in reg:
-                #if j[2]=="R0"or j[2]=="R1" or j[2]=="R2" or j[2]=="R3" or j[2]=="R4" or j[2]=="R5" or j[2]=="R6" or j[1]=="R0"or j[1]=="R1" or j[1]=="R2" or j[1]=="R3" or j[1]=="R4" or j[1]=="R5" or j[1]=="R6" or j[1]=="FLAGS" and j[2]!="FLAGS":
                     print(C_move_R(j))
                     x=C_move_R(j)
                     lst.append(x)
@@ -265,12 +259,17 @@ for j in l:
                 print(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
         elif j[0][0]=="var":
             continue
-        elif j[0] in label_value.keys():
-            print("eureka",label_value.values())
-        else:
-            print(f"Error Invalid Instruction:{j[0]}")
+        elif j[0] in label_value:
+            print(label_value[j[0]])
+            #print(label_value)
+            #print("YES")
+            
+        elif j[0] in label_value:
+            continue
+        elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var":
+            print(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
 
-print("KEYS",label_value.keys())
+#print("KEYS",label_value.keys())
 #print("fire",list_label_value)
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:

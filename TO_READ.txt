@@ -2,8 +2,7 @@ var x
 var y 
 var z
 label: add R1 R2 R3
-mul R1 R2 R3
-mov R5 $10
 val: mov R1 R2 R3
+label
 hlt
 
