@@ -1,4 +1,4 @@
-from TYPE_A_ADD import A_add
+'''from TYPE_A_ADD import A_add
 from TYPE_A_MUL import A_mul
 from TYPE_A_SUB import *
 from TYPE_B_MOVE_IM import B_mov_i
@@ -18,9 +18,210 @@ from TYPE_B_LEFTSHIFT import B_leftshift
 from TYPE_E_UNCONDITIONALJUMP import E_u_jump
 from TYPE_E_JUMPIFG import E_jumpifg
 from TYPE_E_JUMPIFE import E_jumpife
-#from Memory_Address import mem_add
-from DICT_VALUE import *
+from DICT_VALUE import *'''
 import sys
+
+#=======================================================================================================================
+op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
+,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
+,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
+"R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
+
+unused={"A":"00","C":"00000","E":"000","F":"00000000000"}
+type_A=["add","sub","mul","div","xor","or","and"]
+type_B=["mov","rs","ls"]
+type_C=["mov","div","not","cmp"]
+type_D=["ld","st"]
+type_E=["jmp","jlt","jgt","je"]
+type_F=["hlt"]
+
+reg=["R0","R1","R2","R3","R4","R5","R6","FLAGS"]
+
+def A_add(to_read):
+        binary_encoding=""
+        if to_read[0]=="add":
+            binary_encoding=op_code["add"]
+        binary_encoding+=unused["A"]+op_code[to_read[1]]+op_code[to_read[2]]+op_code[to_read[3]]
+        return binary_encoding
+
+def A_and(to_encode):
+        binary_encoding=""
+        if to_encode[0]=="and":
+            binary_encoding=op_code["and"]
+        binary_encoding+=unused["A"]+op_code[to_encode[1]]+op_code[to_encode[2]]+op_code[to_encode[3]]
+        return binary_encoding
+
+def A_mul(user):
+
+    val=l.op_code["mul"]
+    valueR1=op_code[user[1]]
+    valueR2=op_code[user[2]]
+    valueR3=op_code[user[3]]
+    return (val+unused["A"]+valueR1+valueR2+valueR3)
+
+def A_or(inp):
+   
+        s=op_code['or']+unused["A"]+op_code[inp[1]]+op_code[inp[2]]+op_code[inp[3]]
+        return s
+
+def A_sub(inp):
+   
+        s=op_code['sub']+unused["A"]+op_code[inp[1]]+op_code[inp[2]]+op_code[inp[3]]
+        return s
+   
+def A_xor(to_encode):
+    binary_encoding=""
+    if to_encode[0]=="xor":
+        binary_encoding=op_code["xor"]
+    binary_encoding+=unused["A"]+op_code[to_encode[1]]+op_code[to_encode[2]]+op_code[to_encode[3]]
+    return binary_encoding
+
+def B_leftshift(user):
+    
+    val=l.op_code["ls"]
+    valueR1=l.op_code[user[1]]
+    valueR2=user[2][1:]
+    with open("TO_REAtxt") as f:
+        file_read=f.read().split('\n')
+        for i in range(len(file_read)):
+            if valueR2 in file_read[i]:
+                i+=1
+                break
+    num=len(file_read)-i
+    mem_addr=''
+    while num:
+        r=num%2
+        mem_addr+=str(r)
+        num//=2
+    mem_addr=mem_addr[::-1]
+    if len(mem_addr)<8:
+        mem_addr='0'*(8-len(mem_addr))+mem_addr
+
+    return(val+valueR1+mem_addr)
+
+def B_mov_i(inp):
+    s=op_code['mov_I']+op_code[inp[1]]
+    num=''
+    for ch in inp[2]:
+        if ch!='$':
+            num+=ch
+    num=int(num)
+    num_bin=''
+    while num:
+        r=num%2
+        num_bin+=str(r)
+        num=num//2
+    num_bin=num_bin[::-1]
+    if len(num_bin)<8:
+        num_bin='0'*(8-len(num_bin))+num_bin
+    s+=num_bin
+    return s
+
+def C_move_R(to_read):
+    binary_encoding=""
+    if to_read[0]=="mov":
+        binary_encoding=op_code["mov_R"]
+    binary_encoding+=unused["C"]+op_code[to_read[1]]+op_code[to_read[2]]
+    return binary_encoding
+
+def B_rs(to_encode):
+    x=to_encode[2].split("$")
+    for ch in range(1,len(x)):
+        #print("Value",type(x[ch]))
+        bnr = bin(int(x[ch])).replace('0b','')
+        #print(bnr)
+        x = bnr[::-1] #this reverses an array
+        while len(x) < 8:
+            x += '0'
+        bnr = x[::-1]
+        if to_encode[0]=="rs":
+                binary_encoding=op_code["rs"]
+        binary_encoding+=op_code[to_encode[1]]+bnr
+        return binary_encoding
+
+def C_compare(inp):
+    s=op_code['cmp']+unused['C']+op_code[inp[1]]+op_code[inp[2]]
+    return s
+
+def C_div(to_encode):
+    binary_encoding=""
+    if to_encode[0]=="div":
+        binary_encoding=op_code["div"]
+    binary_encoding+=unused["C"]+op_code[to_encode[1]]+op_code[to_encode[2]]
+    return binary_encoding
+
+def C_not(inp):
+    s=""
+    if inp[0]=="not":
+        s=op_code["not"]
+    s+=unused['C']+op_code[inp[1]]+op_code[inp[2]]
+    return s 
+
+def D_load(user,d):
+    val=l.op_code["ld"]
+    valueR1=l.op_code[user[1]]
+    for i in d:
+        if i==user[2]:
+            s=d[i]
+            break
+    return(val+valueR1+s)
+
+def D_store(inp,dict):
+    for i in dict.keys():
+        if i==inp[2]:
+            mem_addr=dict[i]
+            break
+    s=op_code[inp[0]]+op_code[inp[1]]+mem_addr
+    return s
+
+def E_jumpife(user, d):
+    val=op_code["je"]
+    for i in d.keys():
+        if i==user[1]:
+            s=d[i]
+            break
+    return (val+unused["E"]+s)
+
+def E_jumpifg(user,d):
+    val=l.op_code["jgt"]
+    for i in d.keys():
+        if i==user[1]:
+            s=d[i]
+            break
+    return (val+unused["E"]+s)
+
+def E_jump_less(inp,dict):
+    for i in dict.keys():
+        if i==inp[1]:
+            mem_addr=dict[i]
+            break
+    s=op_code[inp[0]]+unused['E']+mem_addr
+    return s
+
+def E_u_jump(user, d): 
+    val=l.op_code["jmp"]
+    for i in d.keys():
+        if i==user[1]:
+            s=d[i]
+            break
+    return (val+unused["E"]+s)
+
+def F_hlt(to_encode):
+    x=""
+    while len(x) < 11:
+        x += '0'
+    binary_encoding=""
+    if to_encode[0]=="hlt":
+        binary_encoding=op_code["hlt"]
+    binary_encoding+=x
+    return binary_encoding
+
+
+
+
+
+#=======================================================================================================================
+
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
@@ -63,7 +264,7 @@ for j in l:
 for variable in var_list:
     dict[variable]=format(var_start,"08b")
     var_start+=1
-#print(dict)
+
 label_value={}
 if ["hlt"] not in l:
     print("Missing HLT insturction")
@@ -83,8 +284,6 @@ for j in l:
         print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
         found_error=1
     
-    #if j[0] in list(op_code.keys())[:20]:
-        #print(j[0])
     for i in j:
         if i not in op_code.keys() and j.count(i)>1:
             print(f'Error: Syntax Error at line {c_op}!')
@@ -104,7 +303,6 @@ for j in l:
         found_error=1
 
     else:
-        #print(j)
         lenght_of_list=len(j[0])
         j1=[]
         for v in j:
@@ -117,7 +315,7 @@ for j in l:
                     label_value[t[0]]=format(label_num,"08b")
                     
         if j[0][0:lenght_of_list-1]  in label_value:
-            #print("check",j[0][0:lenght_of_list-1])
+        
             j.pop(0)
         if j!=[]:
             if j[0] in type_A :
@@ -394,8 +592,7 @@ for j in l:
                 continue
             elif j[0] in label_value and found_error==0:
                 print(label_value[j[0]])
-                #print(label_value)
-                #print("YES")
+                
                 
             elif j[0] in label_value:
                 continue
@@ -406,9 +603,10 @@ for j in l:
             print(f'General Syntax Error at line {c_op}')
             found_error=1
 
-#print("KEYS",label_value.keys())
-#print("fire",list_label_value)
+
 with open('OUTPUT.TXT', 'w') as f:
     for line in lst:
         line=line+'\n'
         f.write(line)  
+
+

@@ -22,13 +22,4 @@ with open("TO_READ.txt") as f:
             binary_encoding+=U.unused["A"]+value.op_code[to_read[1]]+value.op_code[to_read[2]]+value.op_code[to_read[3]]
             print(binary_encoding)
         #add(to_read)'''
-                
-        
-        '''if to_read[0]=="mov" and to_read[2]=="R1" or to_read[2]=="R2" or to_read[2]=="R3":
-            move_im.mov_I(to_read)'''
-        '''if to_read[0]=="add":
-            add(to_read)
-        else:
-            print("DONE")
-    #print(L[0][0])  
-'''
+  
