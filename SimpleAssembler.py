@@ -616,7 +616,7 @@ for j in l:
             found_error=1
 
 
-if lst_error==[]:
+if (lst_error==[]):
     for line in lst:
         line=line+'\n'
         sys.stdout.write(line)
