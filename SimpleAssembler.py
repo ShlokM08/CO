@@ -58,11 +58,11 @@ def A_xor(to_encode):
 def B_leftshift(user):
     val=l.op_code["ls"]
     valueR1=l.op_code[user[1]]
-    valueR2=user[2][1:]
+    num=int(user[2][1:])
     mem_addr=''
     while num:
         r=num%2
-        mem_addr+=str(valueR2)
+        mem_addr+=str(r)
         num//=2
     mem_addr=mem_addr[::-1]
     if len(mem_addr)<8:
