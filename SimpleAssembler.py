@@ -1,4 +1,4 @@
-
+import sys
 
 #=======================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
@@ -195,19 +195,14 @@ def F_hlt(to_encode):
     binary_encoding+=x
     return binary_encoding
 
-
-
-
-
 #=======================================================================================================================
-import sys
-
 
 asi=[]
 L=[]
-for line in sys.stdin():
+for line in sys.stdin:
     asi.append(line.rstrip())
-#print (asi)
+print(asi)
+
 asii=[]
 for line in asi:
     if line!='':
@@ -616,11 +611,13 @@ for j in l:
             found_error=1
 
 
-if (lst_error==[]):
-    for line in lst:
-        line=line+'\n'
-        sys.stdout.write(line)
-else:
+if (lst_error!=[]):
     for line in lst_error:
+        print(line)
+        line=line+'\n'
+        sys.stdout.write(line)   
+else:
+    for line in lst:
+        print(line)
         line=line+'\n'
         sys.stdout.write(line)
