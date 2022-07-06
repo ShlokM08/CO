@@ -63,18 +63,17 @@ if ["hlt"] not in l:
     print("Missing HLT insturction")
 list_of_instructions=[]
 
-for var in l:
-    #print(var)
-    c=0
-    if "var" not in var[0] and c>num_of_var:
-        c+=1
-        print("ERROR:Missing var or var not in first line")
-        
-
+c_var=0
+for j in l:
+        if j[0]=='var':
+            c_var+=1
+        else:
+            break
 for j in l:
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
-    
+    elif j[0]=='var' and l.index(j)+1>c_var:
+        print(f'Error: Variable at line {l.index(j)+1} not defined in the beginning')
     else:
         #print(j)
         lenght_of_list=len(j[0])
