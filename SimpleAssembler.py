@@ -70,11 +70,24 @@ for j in l:
             c_var+=1
         else:
             break
+c_op=0
 for j in l:
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
-    elif j[0]=='var' and l.index(j)+1>c_var:
+    
+    #if j[0] in list(op_code.keys())[:20]:
+        #print(j[0])
+    for i in j:
+        if i not in op_code.keys() and j.count(i)>1:
+            print(f'Error: Syntax Error at line {l.index(j)+1}!')
+            break
+
+        '''if j.count(j[0])>1:
+            print(f'Error: Syntax Error in line {l.index(j)+1}')'''
+
+    if j[0]=='var' and l.index(j)+1>c_var:
         print(f'Error: Variable at line {l.index(j)+1} not defined in the beginning')
+
     else:
         #print(j)
         lenght_of_list=len(j[0])
@@ -348,7 +361,7 @@ for j in l:
             elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var" and j[0][0:lenght_of_list-1] not in label_value:
                 print(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
         else:
-            print('General Syntax Error')
+            print(f'General Syntax Error ')
 
 #print("KEYS",label_value.keys())
 #print("fire",list_label_value)
