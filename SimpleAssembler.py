@@ -21,6 +21,7 @@ from TYPE_E_JUMPIFE import E_jumpife
 #from Memory_Address import mem_add
 from DICT_VALUE import *
 import sys
+from inspect import currentframe, getframeinfo
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
