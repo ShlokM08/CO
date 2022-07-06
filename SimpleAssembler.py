@@ -1,5 +1,4 @@
-import sys
-import fileinput
+
 
 #=======================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
@@ -201,7 +200,8 @@ def F_hlt(to_encode):
 
 
 #=======================================================================================================================
-
+import sys
+import fileinput
 
 asi=[]
 L=[]
@@ -258,6 +258,13 @@ for j in l:
             break
 c_op=0
 for j in l:
+    if len(asii)<=256:
+        continue
+    else:
+        print(f'ERROR:Size of input greater than 256 lines')
+        found_error=1
+        lst_error.append(f'ERROR:Size of input greater than 256 lines')
+    
     c_op+=1
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
@@ -276,9 +283,6 @@ for j in l:
             found_error=1
             lst_error.append('Error: Space Error')
             break
-
-        '''if j.count(j[0])>1:
-            print(f'Error: Syntax Error in line {c_op}')'''
 
     if j[0]=='var' and l.index(j)+1>c_var:
         print(f'Error: Variable at line {c_op} not defined in the beginning')
