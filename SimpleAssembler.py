@@ -56,7 +56,6 @@ def A_xor(to_encode):
     return binary_encoding
 
 def B_leftshift(user):
-    
     val=l.op_code["ls"]
     valueR1=l.op_code[user[1]]
     valueR2=user[2][1:]
