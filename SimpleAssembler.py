@@ -201,11 +201,11 @@ def F_hlt(to_encode):
 
 #=======================================================================================================================
 import sys
-import fileinput
+
 
 asi=[]
 L=[]
-for line in fileinput.input():
+for line in sys.stdin():
     asi.append(line.rstrip())
 #print (asi)
 asii=[]
