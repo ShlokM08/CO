@@ -90,17 +90,16 @@ for j in l:
         if i not in op_code.keys() and j.count(i)>1:
             print(f'Error: Syntax Error at line {c_op}!')
             break
+    for ch in err:
+        if ch==c_op:
+            print('Error: Space Error')
+            break
 
         '''if j.count(j[0])>1:
             print(f'Error: Syntax Error in line {c_op}')'''
 
     if j[0]=='var' and l.index(j)+1>c_var:
         print(f'Error: Variable at line {c_op} not defined in the beginning')
-    
-    for ch in err:
-        if ch==c_op:
-            print('Error: Space Error')
-            break
 
     else:
         #print(j)
