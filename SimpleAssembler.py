@@ -35,6 +35,12 @@ for line in asi:
     if line!='':
         asii.append(line)
 c=0
+err=[]
+c_err=0
+for i in asii:
+    c_err+=1
+    if '\t' in i:
+        err.append(c_err)
 for i in asii:
     i=i.split()
     c+=1
@@ -74,6 +80,8 @@ c_op=0
 
 for j in l:
     c_op+=1
+
+
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
     
@@ -89,11 +97,15 @@ for j in l:
 
     if j[0]=='var' and l.index(j)+1>c_var:
         print(f'Error: Variable at line {c_op} not defined in the beginning')
+    
+    for ch in err:
+        if ch==c_op:
+            print('Error: Space Error')
+            break
 
     else:
         #print(j)
         lenght_of_list=len(j[0])
-        
         j1=[]
         for v in j:
             x=v.split(":")
