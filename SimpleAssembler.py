@@ -193,7 +193,6 @@ asi=[]
 L=[]
 for line in sys.stdin:
     asi.append(line.rstrip())
-print(asi)
 
 asii=[]
 for line in asi:
