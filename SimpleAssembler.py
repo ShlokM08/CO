@@ -330,7 +330,7 @@ for j in l:
                 elif j[1]=="FLAGS":
                     print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
                     lst_error.append(f'ERROR:Illegal use of FLAG Register in line {c_op}')
-                    found_error
+                    found_error=1
                 elif j[0]=="mov" :
                     #print(keypresent(j))
                     if '$' in j[2]:
