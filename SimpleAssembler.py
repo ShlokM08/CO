@@ -612,10 +612,11 @@ for j in l:
             found_error=1
 
 
-with open('OUTPUT.TXT', 'w') as f:
+if lst_error==[]:
     for line in lst:
         line=line+'\n'
         sys.stdout.write(line)
+else:
     for line in lst_error:
         line=line+'\n'
         sys.stdout.write(line)
