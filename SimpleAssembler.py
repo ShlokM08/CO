@@ -252,17 +252,14 @@ for j in l:
                             if j[1] in ch[0]:
                                 lbl=1
                                 break
-                    if found==1:
-                        print(E_u_jump(j,dict))
-                        x=E_u_jump(j,dict)
-                        lst.append(x)
-                    elif lbl==1:
+                    
+                    if lbl==1:
                         print(E_u_jump(j,label_value))
                         x=E_u_jump(j,label_value)
                         lst.append(x)
                     else: 
-                        if found==0:
-                            print(f'Error: Variable {j[1]} not defined')
+                        if found==1:
+                            print(f'Error: Misuse of variable as label')
                         elif lbl==0:
                             print('Error: Label not found')
                 elif j[0]=="jlt":
@@ -278,17 +275,14 @@ for j in l:
                             if j[1] in ch[0]:
                                 lbl=1
                                 break
-                    if found==1:
-                        print(E_jump_less(j,dict))
-                        x=E_jump_less(j,dict)
-                        lst.append(x)
-                    elif lbl==1:
+
+                    if lbl==1:
                         print(E_u_jump(j,label_value))
                         x=E_u_jump(j,label_value)
                         lst.append(x)
                     else:
-                        if found==0: 
-                            print(f'Error: Variable {j[1]} is not defined')
+                        if found==1: 
+                            print(f'Error: Misuse of variable as label')
                         elif lbl==0:
                             print('Error: Label not found')
                 elif j[0]=="jgt":
@@ -304,17 +298,13 @@ for j in l:
                             if j[1] in ch[0]:
                                 lbl=1
                                 break
-                    if found==1:
-                        print(E_jumpifg(j,dict))
-                        x=E_jumpifg(j,dict)
-                        lst.append(x)
-                    elif lbl==1:
+                    if lbl==1:
                         print(E_u_jump(j,label_value))
                         x=E_u_jump(j,label_value)
                         lst.append(x)
                     else: 
-                        if found==0:
-                            print(f'Error: Variable {j[1]} not defined')
+                        if found==1:
+                            print(f'Error: Misuse of variabel as label')
                         elif lbl==0:
                             print('Error: Label not found')
                 elif j[0]=="je":
@@ -330,17 +320,13 @@ for j in l:
                             if j[1] in ch[0]:
                                 lbl=1
                                 break
-                    if found==1:
-                        print(E_jumpife(j,dict))
-                        x=E_jumpife(j,dict)
-                        lst.append(x)
-                    elif lbl==1:
+                    if lbl==1:
                         print(E_u_jump(j,label_value))
                         x=E_u_jump(j,label_value)
                         lst.append(x)
                     else:
-                        if found==0:
-                            print(f'Error; Variable {j[1]} not defined')
+                        if found==1:
+                            print(f'Error: Misuse of variable as label')
                         elif lbl==0:
                             print('Error: Label not found')
             elif j[0] in type_F:
@@ -362,7 +348,7 @@ for j in l:
             elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var" and j[0][0:lenght_of_list-1] not in label_value:
                 print(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
         else:
-            print('Error')
+            print(' General Syntax Error')
 
 #print("KEYS",label_value.keys())
 #print("fire",list_label_value)
