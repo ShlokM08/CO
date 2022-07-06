@@ -14,7 +14,7 @@ label: label: add R0 R1 R3
 label: label: add R0 R1 R3 R4
 label: label: $4
 label: R0 R1 R3
-var
+var var
 efff-ddd:
 fgff;dd
 label: adc R0 R1 R1
