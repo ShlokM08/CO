@@ -437,11 +437,11 @@ for j in l:
                                 if ch[1]==j[2]:
                                     found=1
                                     break
-                        l_err=1
+                        l_error=1
                         for ch in l:
                             if ':' in ch[0]:
                                 if j[1] in ch[0]:
-                                    l_err=0
+                                    l_error=0
                                     break
 
                         
@@ -456,7 +456,7 @@ for j in l:
                                 found_error=1
                                 l_err.append()
                                 l_err.append(f"Error: Variable {j[2]} not defined")
-                            elif l_err==0:
+                            elif l_error==0:
                                 print('Error: Misuse of label as variable')
                                 found_error=1
                                 l_err.append('Error: Misuse of label as variable')
@@ -467,13 +467,13 @@ for j in l:
                                     if ch[1]==j[2]:
                                         found=1
                                         break
-                            l_err=1
+                            l_error=1
                             for ch in l:
                                 if ':' in ch[0]:
                                     if j[1] in ch[0]:
-                                        l_err=0
+                                        l_error=0
                                         break
-                            if found==1 and l_err==1:
+                            if found==1 and l_error==1:
                                 if found_error==0:
                                     #print(D_store(j, dict))
                                     x=D_store(j,dict)
@@ -483,7 +483,7 @@ for j in l:
                                     print(f"Error: Variable {j[2]} not defined")
                                     found_error=1
                                     l_err.append(f"Error: Variable {j[2]} not defined")
-                                elif l_err==0:
+                                elif l_error==0:
                                     print('Error: Misuse of label as variable')
                                     found_error=1
                                     l_err.append('Error: Misuse of label as variable')
