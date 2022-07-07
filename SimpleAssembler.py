@@ -252,9 +252,9 @@ found_error=0
 l_err=[]
 label_value={}
 if ["hlt"] not in l and 'hlt' not in l[len(l)-1]:
-    print("Missing HLT insturction")
+    print(f"Missing HLT insturction in final line")
     found_error=1
-    l_err.append("Missing HLT insturction")
+    l_err.append(f"Missing HLT insturction in final line")
 list_of_instructions=[]
 c_var=0
 for j in l:
@@ -275,7 +275,11 @@ for j in l:
                 label_num=int(c_op)-num_of_var+1
                 label_value[t[0]]=format(label_num,"08b")
 c_op=0
+hlt_count=0
 for j in l:
+    if hlt_count>0:
+        print(f"hlt instruction used more than once;used at line {c_op}")
+        l_err.append(f"hlt instruction used more than once;used at line {c_op}")
     c_op+=1
     if j[0]!="mov" and "FLAGS" in j[1:]: 
         print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
@@ -361,13 +365,13 @@ for j in l:
                                     x=B_mov_i(j)
                                     lst.append(x)
                             else: 
-                                print('Error: Illegal Immediate Value')
+                                print(f'Error: Illegal Immediate Value in line {c_op}')
                                 found_error=1
-                                l_err.append('Error: Illegal Immediate Value')
+                                l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
                         except: 
-                            print('Error: Illegal Immediate Value')
+                            print(f'Error: Illegal Immediate Value in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Illegal Immediate Value')
+                            l_err.append(f'Error: Illegal Immediate Value  in line {c_op}')
                 elif j[0]=="rs":
                         num=''
                         for ch in j[2]:
@@ -381,13 +385,13 @@ for j in l:
                                     x=B_rs(j)
                                     lst.append(x)
                             else: 
-                                print('Error: Illegal immediate Value')
+                                print(f'Error: Illegal Immediate Value in line {c_op}')
                                 found_error=1
-                                l_err.append('Error: Illegal Immediate Value')
+                                l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
                         except:
-                            print('Error: Illegal Immediate Value')
+                            print(f'Error: Illegal Immediate Value in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Illegal Immediate Value')
+                            l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
                 elif j[0]=="ls":
                     num=''
                     for ch in j[2]:
@@ -401,13 +405,13 @@ for j in l:
                                 x=B_leftshift(j)
                                 lst.append(x)
                         else: 
-                            print('Error: Illegal Immediate Value')
+                            print(f'Error: Illegal Immediate Value in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Illegal Immediate Value')
+                            l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
                     except:
-                        print('Error: Illegal Immediate Value')
+                        print(f'Error: Illegal Immediate Value in line {c_op}')
                         found_error=1
-                        l_err.append('Error: Illegal Immediate Value')
+                        l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
             elif j[0] in type_C:
                 if j[0]=="mov":
                     if j[2] in reg and j[2]!="FLAGS" and j[1] in reg:
@@ -454,13 +458,13 @@ for j in l:
                                 lst.append(x)
                         else:
                             if found==0:
-                                #print(f'Error: Variable {j[2]} not defined')
+                                #print(f'Error: Variable {j[2]} not defined in line {c_op} in line {c_op}')
                                 found_error=1
-                                l_err.append(f"Error: Variable {j[2]} not defined")
+                                l_err.append(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op}")
                             elif l_error==0:
-                                print('Error: Misuse of label as variable')
+                                print(f'Error: Misuse of label as variable in line {c_op}')
                                 found_error=1
-                                l_err.append('Error: Misuse of label as variable')
+                                l_err.append(f'Error: Misuse of label as variable in line {c_op}')
                     elif j[0]=="st":
                             found=0
                             for ch in l:
@@ -481,13 +485,13 @@ for j in l:
                                     lst.append(x)
                             else: 
                                 if found==0:
-                                    print(f"Error: Variable {j[2]} not defined")
+                                    print(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op} in line {c_op}")
                                     found_error=1
-                                    l_err.append(f"Error: Variable {j[2]} not defined")
+                                    l_err.append(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op} in line {c_op}")
                                 elif l_error==0:
-                                    print('Error: Misuse of label as variable')
+                                    print(f'Error: Misuse of label as variable in line {c_op}')
                                     found_error=1
-                                    l_err.append('Error: Misuse of label as variable')
+                                    l_err.append(f'Error: Misuse of label as variable in line {c_op}')
                                 
             elif j[0] in type_E:
                 if j[0]=="jmp":
@@ -511,13 +515,13 @@ for j in l:
                             lst.append(x)
                     else: 
                         if found==1:
-                            print(f'Error: Misuse of variable as label')
+                            print(f'Error: Misuse of variable as label in line {c_op}')
                             found_error=1
-                            l_err.append(f'Error: Misuse of variable as label')
+                            l_err.append(f'Error: Misuse of variable as label in line {c_op}')
                         elif lbl==0:
-                            print('Error: Label not found')
+                            print(f'Error: Label not found in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Label not found')
+                            l_err.append(f'Error: Label not found in line {c_op}')
                 elif j[0]=="jlt":
                     found=0
                     lbl=0
@@ -544,9 +548,9 @@ for j in l:
                             found_error=1
                             l_err.append(f'Error: Misuse of variable as label')
                         elif lbl==0:
-                            print('Error: Label not found')
+                            print(f'Error: Label not found in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Label not found')
+                            l_err.append(f'Error: Label not found in line {c_op}')
                 elif j[0]=="jgt":
                     found=0
                     lbl=0
@@ -571,8 +575,8 @@ for j in l:
                             found_error=1
                             l_err.append(f'Error: Misuse of variable as label')
                         elif lbl==0:
-                            print('Error: Label not found')
-                            l_err.append('Error: Label not found')
+                            print(f'Error: Label not found in line {c_op}')
+                            l_err.append(f'Error: Label not found in line {c_op}')
                             found_error=1
                 elif j[0]=="je":
                     found=0
@@ -595,15 +599,16 @@ for j in l:
                             lst.append(x)
                     else:
                         if found==1:
-                            print(f'Error: Misuse of variable as label')
+                            print(f'Error: Misuse of variable as label in line {c_op}')
                             found_error=1
-                            l_err.append(f'Error: Misuse of variable as label')
+                            l_err.append(f'Error: Misuse of variable as label in line {c_op}')
                         elif lbl==0:
-                            print('Error: Label not found')
+                            print(f'Error: Label not found in line {c_op}')
                             found_error=1
-                            l_err.append('Error: Label not found')
+                            l_err.append(f'Error: Label not found in line {c_op}')
             elif j[0] in type_F:
                 if j[0]=="hlt" and "hlt" in l[len(l)-1]:
+                    hlt_count+=1
                     if found_error==0:
                         #print(F_hlt(j))
                         x=F_hlt(j)
