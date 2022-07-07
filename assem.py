@@ -77,8 +77,8 @@ def A_xor(to_encode):
     return binary_encoding
 
 def B_leftshift(user):
-    val=l.op_code["ls"]
-    valueR1=l.op_code[user[1]]
+    val=op_code["ls"]
+    valueR1=op_code[user[1]]
     num=int(user[2][1:])
     mem_addr=''
     while num:
@@ -150,8 +150,8 @@ def C_not(inp):
     return s 
 
 def D_load(user,d):
-    val=l.op_code["ld"]
-    valueR1=l.op_code[user[1]]
+    val=op_code["ld"]
+    valueR1=op_code[user[1]]
     for i in d:
         if i==user[2]:
             s=d[i]
@@ -168,6 +168,7 @@ def D_store(inp,dict):
 
 def E_jumpife(user, d):
     val=op_code["je"]
+    s=''
     for i in d.keys():
         if i==user[1]:
             s=d[i]
@@ -175,7 +176,8 @@ def E_jumpife(user, d):
     return (val+unused["E"]+s)
 
 def E_jumpifg(user,d):
-    val=l.op_code["jgt"]
+    val=op_code["jgt"]
+    s=''
     for i in d.keys():
         if i==user[1]:
             s=d[i]
@@ -191,7 +193,7 @@ def E_jump_less(inp,dict):
     return s
 
 def E_u_jump(user, d): 
-    val=l.op_code["jmp"]
+    val=op_code["jmp"]
     for i in d.keys():
         if i==user[1]:
             s=d[i]
@@ -249,18 +251,29 @@ for variable in var_list:
 found_error=0
 l_err=[]
 label_value={}
-if ["hlt"] not in l:
+if ["hlt"] not in l and 'hlt' not in l[len(l)-1]:
     print("Missing HLT insturction")
     found_error=1
     l_err.append("Missing HLT insturction")
 list_of_instructions=[]
-print(l)
 c_var=0
 for j in l:
         if j[0]=='var':
             c_var+=1
         else:
             break
+c_op=0
+for j in l:
+    c_op+=1
+    j1=[]
+    for v in j:
+        x=v.split(":")
+        j1.append(x)
+    for t in j1:
+        if len(t)>1:
+            if t[1]=="":
+                label_num=int(c_op)-num_of_var
+                label_value[t[0]]=format(label_num,"08b")
 c_op=0
 for j in l:
     c_op+=1
@@ -288,18 +301,7 @@ for j in l:
 
     else:
         #print(j)
-        lenght_of_list=len(j[0])
-        
-        j1=[]
-        for v in j:
-            x=v.split(":")
-            j1.append(x)
-        for t in j1:
-            if len(t)>1:
-                if t[1]=="":
-                    label_num=int(c_op)-num_of_var
-                    label_value[t[0]]=format(label_num,"08b")
-                    
+        lenght_of_list=len(j[0])          
         if j[0][0:lenght_of_list-1]  in label_value:
             #print("check",j[0][0:lenght_of_list-1])
             j.pop(0)
