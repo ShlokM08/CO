@@ -456,7 +456,6 @@ for j in l:
                             if found==0:
                                 #print(f'Error: Variable {j[2]} not defined')
                                 found_error=1
-                                l_err.append()
                                 l_err.append(f"Error: Variable {j[2]} not defined")
                             elif l_error==0:
                                 print('Error: Misuse of label as variable')
