@@ -12,3 +12,4 @@ def A_add(to_read):
         binary_encoding+=U.unused["A"]+value.op_code[to_read[1]]+value.op_code[to_read[2]]+value.op_code[to_read[3]]
         return binary_encoding
 #add()
+

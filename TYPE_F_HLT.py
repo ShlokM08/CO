@@ -13,3 +13,4 @@ def F_hlt(to_encode):
     binary_encoding+=x
     return binary_encoding
 #\hlt(to_encode)
+

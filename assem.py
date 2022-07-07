@@ -1,4 +1,4 @@
-from TYPE_A_ADD import A_add
+#from TYPE_A_ADD import A_add
 from TYPE_A_MUL import A_mul
 from TYPE_A_SUB import *
 from TYPE_B_MOVE_IM import B_mov_i
@@ -12,7 +12,7 @@ from TYPE_B_RIGHTSHIFT import *
 from TYPE_C_DIV import *
 from TYPE_D_STORE import D_store
 from TYPE_E_JUMPIFL import E_jump_less
-from TYPE_F_HLT import *
+#from TYPE_F_HLT import *
 from TYPE_D_LOAD import D_load
 from TYPE_B_LEFTSHIFT import B_leftshift
 from TYPE_E_UNCONDITIONALJUMP import E_u_jump
@@ -22,6 +22,39 @@ from TYPE_E_JUMPIFE import E_jumpife
 from DICT_VALUE import *
 import sys
 from inspect import currentframe, getframeinfo
+#==============================================================================
+op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
+,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
+,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
+"R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
+
+unused={"A":"00","C":"00000","E":"000","F":"00000000000"}
+type_A=["add","sub","mul","div","xor","or","and"]
+type_B=["mov","rs","ls"]
+type_C=["mov","div","not","cmp"]
+type_D=["ld","st"]
+type_E=["jmp","jlt","jgt","je"]
+type_F=["hlt"]
+
+reg=["R0","R1","R2","R3","R4","R5","R6","FLAGS"]
+
+def A_add(to_read):
+        binary_encoding=""
+        if to_read[0]=="add":
+            binary_encoding=op_code["add"]
+        binary_encoding+=unused["A"]+op_code[to_read[1]]+op_code[to_read[2]]+op_code[to_read[3]]
+        return binary_encoding
+
+def F_hlt(to_encode):
+    x=""
+    while len(x) < 11:
+        x += '0'
+    binary_encoding=""
+    if to_encode[0]=="hlt":
+        binary_encoding=op_code["hlt"]
+    binary_encoding+=x
+    return binary_encoding
+#===============================================
 file=open("TO_READ.txt","r")
 asi=[]
 L=[]
@@ -110,7 +143,7 @@ for j in l:
                     try:
                         if j[0]=="add":
                             found=0
-                            print(A_add(j))
+                            #print(A_add(j))
                             x=A_add(j)
                             lst.append(x)
                         elif j[0]=="sub":
@@ -344,7 +377,7 @@ for j in l:
                             print('Error: Label not found')
             elif j[0] in type_F:
                 if j[0]=="hlt" and "hlt" in l[len(l)-1]:
-                    print(F_hlt(j))
+                    #print(F_hlt(j))
                     x=F_hlt(j)
                     lst.append(x)
                 else:
@@ -366,7 +399,8 @@ for j in l:
 #print("KEYS",label_value.keys())
 #print("fire",list_label_value)
 #with open('OUTPUT.TXT', 'w') as f:
-    for line in lst:
-        line=line+'\n'
+for line in lst:
+        #print(lst)
+        #line=line
         print(line)  
     
