@@ -254,7 +254,7 @@ if ["hlt"] not in l:
     found_error=1
     l_err.append("Missing HLT insturction")
 list_of_instructions=[]
-
+print(l)
 c_var=0
 for j in l:
         if j[0]=='var':
