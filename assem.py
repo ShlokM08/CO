@@ -446,16 +446,10 @@ for j in l:
                             l_err.append('Error: Label not found')
             elif j[0] in type_F:
                 if j[0]=="hlt" and "hlt" in l[len(l)-1]:
-<<<<<<< HEAD
                     if found_error==0:
                         print(F_hlt(j))
                         x=F_hlt(j)
                         lst.append(x)
-=======
-                    #print(F_hlt(j))
-                    x=F_hlt(j)
-                    lst.append(x)
->>>>>>> bf59b475167c655c856b65a9803517d9e3538c8a
                 else:
                     print(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
                     found_error=1
