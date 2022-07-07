@@ -263,27 +263,28 @@ for j in l:
             break
 c_op=0
 for j in l:
+    c_op+=1
     if j[0]!="mov" and "FLAGS" in j[1:]: 
-        print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+        print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
         found_error=1
-        l_err.append(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+        l_err.append(f'ERROR:Illegal use of FLAG Register in line {c_op}')
     
     #if j[0] in list(op_code.keys())[:20]:
         #print(j[0])
     for i in j:
         if i not in op_code.keys() and j.count(i)>1:
-            print(f'Error: Syntax Error at line {l.index(j)+1}!')
+            print(f'Error: Syntax Error at line {c_op}!')
             found_error=1
-            l_err.append(f'Error: Syntax Error at line {l.index(j)+1}!')
+            l_err.append(f'Error: Syntax Error at line {c_op}!')
             break
 
         '''if j.count(j[0])>1:
-            print(f'Error: Syntax Error in line {l.index(j)+1}')'''
+            print(f'Error: Syntax Error in line {c_op}')'''
 
-    if j[0]=='var' and l.index(j)+1>c_var:
-        print(f'Error: Variable at line {l.index(j)+1} not defined in the beginning')
+    if j[0]=='var' and c_op>c_var:
+        print(f'Error: Variable at line {c_op} not defined in the beginning')
         found_error=1
-        l_err.append(f'Error: Variable at line {l.index(j)+1} not defined in the beginning')
+        l_err.append(f'Error: Variable at line {c_op} not defined in the beginning')
 
     else:
         #print(j)
@@ -296,7 +297,7 @@ for j in l:
         for t in j1:
             if len(t)>1:
                 if t[1]=="":
-                    label_num=int(l.index(j)+1)-num_of_var
+                    label_num=int(c_op)-num_of_var
                     label_value[t[0]]=format(label_num,"08b")
                     
         if j[0][0:lenght_of_list-1]  in label_value:
@@ -331,18 +332,18 @@ for j in l:
                             x=A_or(j)
                             lst.append(x)
                     except:
-                        print(f'ERROR:Undefined Register in line {l.index(j)+1}')
+                        print(f'ERROR:Undefined Register in line {c_op}')
                         found_error=1
-                        l_err.append(f'ERROR:Undefined Register in line {l.index(j)+1}')
+                        l_err.append(f'ERROR:Undefined Register in line {c_op}')
             elif j[0] in type_B and '$' in j[2]:
                 if j[1] not in reg:
-                    print(f'ERROR:Incorrect value of register in line {l.index(j)+1}')
+                    print(f'ERROR:Incorrect value of register in line {c_op}')
                     found_error=1
-                    l_err.append(f'ERROR:Incorrect value of register in line {l.index(j)+1}')
+                    l_err.append(f'ERROR:Incorrect value of register in line {c_op}')
                 elif j[1]=="FLAGS":
-                    print(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+                    print(f'ERROR:Illegal use of FLAG Register in line {c_op}')
                     found_error=1
-                    l_err.append(f'ERROR:Illegal use of FLAG Register in line {l.index(j)+1}')
+                    l_err.append(f'ERROR:Illegal use of FLAG Register in line {c_op}')
                 elif j[0]=="mov" :
                     #print(keypresent(j))
                     if '$' in j[2]:
@@ -413,9 +414,9 @@ for j in l:
                             x=C_move_R(j)
                             lst.append(x)
                     elif j[2]=="FLAGS":
-                        print(f'Error: Illegal usage FLAG in line {l.index(j)+1}')
+                        print(f'Error: Illegal usage FLAG in line {c_op}')
                         found_error=1
-                        l_err.append(f'Error: Illegal usage FLAG in line {l.index(j)+1}')
+                        l_err.append(f'Error: Illegal usage FLAG in line {c_op}')
                 elif j[0]=="div" and found_error==0:
                     #print(C_div(j))
                     x=C_div(j)
@@ -607,9 +608,9 @@ for j in l:
                         x=F_hlt(j)
                         lst.append(x)
                 else:
-                    print(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
+                    print(f'HLT being used in line {c_op} instead of as final instruction')
                     found_error=1
-                    l_err.append(f'HLT being used in line {l.index(j)+1} instead of as final instruction')
+                    l_err.append(f'HLT being used in line {c_op} instead of as final instruction')
             elif j[0][0]=="var":
                 continue
             elif j[0] in label_value:
@@ -620,8 +621,8 @@ for j in l:
             elif j[0] in label_value:
                 continue
             elif j[0] not in type_A+type_B+type_C+type_D+type_E+type_F and j[0] not in label_value and j[0]!="var" and j[0][0:lenght_of_list-1] not in label_value:
-                print(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
-                l_err.append(f"Error Invalid Instruction: {j[0]} in line {l.index(j)+1}")
+                print(f"Error Invalid Instruction: {j[0]} in line {c_op}")
+                l_err.append(f"Error Invalid Instruction: {j[0]} in line {c_op}")
                 found_error=1
         else:
             print(f'General Syntax Error ')
