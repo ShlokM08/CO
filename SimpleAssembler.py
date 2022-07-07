@@ -626,9 +626,9 @@ for j in l:
                 l_err.append(f"Error Invalid Instruction: {j[0]} in line {c_op}")
                 found_error=1
         else:
-            print(f'General Syntax Error ')
+            print(f'General Syntax Error at line {c_op} ')
             found_error=1
-            l_err.append(f'General Syntax Error ')
+            l_err.append(f'General Syntax Error at line {c_op} ')
 
 #print("KEYS",label_value.keys())
 #print("fire",list_label_value)
