@@ -1,25 +1,3 @@
-#from TYPE_A_ADD import A_add
-'''from TYPE_A_MUL import A_mul
-from TYPE_A_SUB import *
-from TYPE_B_MOVE_IM import B_mov_i
-from TYPE_B_MOVE_R import *
-from TYPE_C_COMPARE import C_compare
-from TYPE_C_NOT import *
-from TYPE_A_AND import *
-from TYPE_A_OR import *
-from TYPE_A_XOR import *
-from TYPE_B_RIGHTSHIFT import *
-from TYPE_C_DIV import *
-from TYPE_D_STORE import D_store
-from TYPE_E_JUMPIFL import E_jump_less
-#from TYPE_F_HLT import *
-from TYPE_D_LOAD import D_load
-from TYPE_B_LEFTSHIFT import B_leftshift
-from TYPE_E_UNCONDITIONALJUMP import E_u_jump
-from TYPE_E_JUMPIFG import E_jumpifg
-from TYPE_E_JUMPIFE import E_jumpife
-#from Memory_Address import mem_add
-from DICT_VALUE import *'''
 import sys
 #==============================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
@@ -645,4 +623,4 @@ if l_err==[]:
             print(line)  
     else:
         for i in l_err:
-            print(line)
+            print(i)
