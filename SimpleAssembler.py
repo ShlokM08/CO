@@ -32,7 +32,7 @@ def A_and(to_encode):
 
 def A_mul(user):
 
-    val=l.op_code["mul"]
+    val=op_code["mul"]
     valueR1=op_code[user[1]]
     valueR2=op_code[user[2]]
     valueR3=op_code[user[3]]
@@ -189,15 +189,14 @@ def F_hlt(to_encode):
     binary_encoding+=x
     return binary_encoding
 
-#===============================================
-#file=open("TO_READ.txt","r")
+#====================================================================================================================================
+
 asi=[]
 L=[]
-'''for ch in file:
-    asi.append(ch.rstrip())'''
+
 for line in sys.stdin:
     asi.append(line.rstrip())
-#print (asi)
+
 asii=[]
 for line in asi:
     if line!='':
@@ -207,7 +206,7 @@ for i in asii:
     i=i.split()
     c+=1
     L.append(i)
-#print(L)
+
 l=[]
 num_of_var=0
 for j in L:
@@ -224,9 +223,9 @@ for j in l:
     
         num_of_var+=1
 for variable in var_list:
-    dict[variable]=format(var_start,"08b")
+    dict[variable]=format(var_start-1,"08b")
     var_start+=1
-#print(dict)
+
 found_error=0
 l_err=[]
 label_value={}
@@ -265,8 +264,7 @@ for j in l:
         found_error=1
         l_err.append(f'ERROR:Illegal use of FLAG Register in line {c_op}')
     
-    #if j[0] in list(op_code.keys())[:20]:
-        #print(j[0])
+    
     for i in j:
         if i not in op_code.keys() and j.count(i)>1:
             print(f'Error: Syntax Error at line {c_op}!')
@@ -274,8 +272,7 @@ for j in l:
             l_err.append(f'Error: Syntax Error at line {c_op}!')
             break
 
-        '''if j.count(j[0])>1:
-            print(f'Error: Syntax Error in line {c_op}')'''
+        
 
     if j[0]=='var' and c_op>c_var:
         print(f'Error: Variable at line {c_op} not defined in the beginning')
@@ -380,7 +377,7 @@ for j in l:
                         num=int(num)
                         if num<256:
                             if found_error==0:
-                                #print(B_leftshift(j))
+                                
                                 x=B_leftshift(j)
                                 lst.append(x)
                         else: 
@@ -395,7 +392,7 @@ for j in l:
                 if j[0]=="mov":
                     if j[2] in reg and j[2]!="FLAGS" and j[1] in reg:
                         if found_error==0:
-                            #print(C_move_R(j))
+                            
                             x=C_move_R(j)
                             lst.append(x)
                     elif j[2]=="FLAGS":
@@ -403,48 +400,43 @@ for j in l:
                         found_error=1
                         l_err.append(f'Error: Illegal usage FLAG in line {c_op}')
                 elif j[0]=="div" and found_error==0:
-                    #print(C_div(j))
                     x=C_div(j)
                     lst.append(x)
                 elif j[0]=="not" and found_error==0:
-                    #print(C_not(j))
                     x=C_not(j)
                     lst.append(x)
                 elif j[0]=="cmp" and found_error==0:
-                    #print(C_compare(j))
                     x=C_compare(j)
                     lst.append(x)
             elif j[0]in type_D:
-                    if j[0]=="ld":
-                        found=0
-                        for ch in l:
-                            if ch[0]=='var':
-                                if ch[1]==j[2]:
-                                    found=1
-                                    break
-                        l_error=1
-                        for ch in l:
-                            if ':' in ch[0]:
-                                if j[1] in ch[0]:
-                                    l_error=0
-                                    break
-
-                        
-                        if found==1 and l_err==1:
-                            if found_error==0:
-                                #print(D_load(j,dict))
-                                x=D_load(j,dict)
-                                lst.append(x)
-                        else:
-                            if found==0:
-                                #print(f'Error: Variable {j[2]} not defined in line {c_op} in line {c_op}')
-                                found_error=1
-                                l_err.append(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op}")
-                            elif l_error==0:
-                                print(f'Error: Misuse of label as variable in line {c_op}')
-                                found_error=1
-                                l_err.append(f'Error: Misuse of label as variable in line {c_op}')
-                    elif j[0]=="st":
+                        if j[0]=="ld":
+                                found=0
+                                for ch in l:
+                                    if ch[0]=='var':
+                                        if ch[1]==j[2]:
+                                            found=1
+                                            break
+                                l_error=1
+                                for ch in l:
+                                    if ':' in ch[0]:
+                                        if j[1] in ch[0]:
+                                            l_error=0
+                                            break
+                                if found==1 and l_error==1:
+                                    if found_error==0:
+                                        x=D_load(j,dict)
+                                        lst.append(x)
+                                else: 
+                                    if found==0:
+                                        print(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op} in line {c_op}")
+                                        found_error=1
+                                        l_err.append(f"Error: Variable {j[2]} not defined in line {c_op} in line {c_op} in line {c_op}")
+                                    elif l_error==0:
+                                        print(f'Error: Misuse of label as variable in line {c_op}')
+                                        found_error=1
+                                        l_err.append(f'Error: Misuse of label as variable in line {c_op}')
+                    
+                        elif j[0]=="st":
                             found=0
                             for ch in l:
                                 if ch[0]=='var':
@@ -459,7 +451,6 @@ for j in l:
                                         break
                             if found==1 and l_error==1:
                                 if found_error==0:
-                                    #print(D_store(j, dict))
                                     x=D_store(j,dict)
                                     lst.append(x)
                             else: 
@@ -489,7 +480,6 @@ for j in l:
                     
                     if lbl==1:
                         if found_error==0:
-                            #print(E_u_jump(j,label_value))
                             x=E_u_jump(j,label_value)
                             lst.append(x)
                     else: 
@@ -517,7 +507,6 @@ for j in l:
 
                     if lbl==1:
                         if found_error==0:
-                            #print(E_u_jump(j,label_value))
                             
                             x=E_u_jump(j,label_value)
                             lst.append(x)
@@ -545,7 +534,6 @@ for j in l:
                                 break
                     if lbl==1:
                         if found_error==0:
-                            #print(E_u_jump(j,label_value))
                             x=E_jumpifg(j,label_value)
                             lst.append(x)
                     else: 
@@ -573,8 +561,7 @@ for j in l:
                     if lbl==1:
                         if found_error==0:
                             x=E_jumpife(j, label_value)
-                            #print(E_u_jump(j,label_value))
-                            #x=E_u_jump(j,label_value)
+                            
                             lst.append(x)
                     else:
                         if found==1:
@@ -589,7 +576,6 @@ for j in l:
                 if j[0]=="hlt" and "hlt" in l[len(l)-1]:
                     hlt_count+=1
                     if found_error==0:
-                        #print(F_hlt(j))
                         x=F_hlt(j)
                         lst.append(x)
                 else:
@@ -600,8 +586,7 @@ for j in l:
                 continue
             elif j[0] in label_value:
                 print(label_value[j[0]])
-                #print(label_value)
-                #print("YES")
+                
                 
             elif j[0] in label_value:
                 continue
@@ -614,13 +599,10 @@ for j in l:
             found_error=1
             l_err.append(f'General Syntax Error at line {c_op} ')
 
-#print("KEYS",label_value.keys())
-#print("fire",list_label_value)
-#with open('OUTPUT.TXT', 'w') as f:
+
 if l_err==[]:
     for line in lst:
-            #print(lst)
-            #line=line
+            
             print(line)  
     else:
         for i in l_err:
