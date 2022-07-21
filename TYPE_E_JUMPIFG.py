@@ -6,5 +6,4 @@ def E_jumpifg(user,d):
     for i in d.keys():
         if i==user[1]:
             s=d[i]
-            break
-    return (val+U.unused["E"]+s)
+            return (val+U.unused["E"]+s)
