@@ -292,6 +292,8 @@ for j in l:
                             found=0
                             #print(A_add(j))
                             x=A_add(j)
+                            
+
                             lst.append(x)
                         elif j[0]=="sub" and found_error==0:
                             #print(A_sub(j))
