@@ -573,15 +573,21 @@ for j in l:
                             found_error=1
                             l_err.append(f'Error: Label not found in line {c_op}')
             elif j[0] in type_F:
-                if j[0]=="hlt" and "hlt" in l[len(l)-1]:
-                    hlt_count+=1
-                    if found_error==0:
-                        x=F_hlt(j)
-                        lst.append(x)
+                if j.count('hlt')==1:
+                    if j[0]=="hlt" and "hlt" in l[len(l)-1]:
+                        hlt_count+=1
+                        if found_error==0:
+                            x=F_hlt(j)
+                            lst.append(x)
+                    else:
+                        print(f'HLT being used in line {c_op} instead of as final instruction')
+                        found_error=1
+                        l_err.append(f'HLT being used in line {c_op} instead of as final instruction')
                 else:
-                    print(f'HLT being used in line {c_op} instead of as final instruction')
+                    print('Error: Halt instruction used twice')
                     found_error=1
-                    l_err.append(f'HLT being used in line {c_op} instead of as final instruction')
+                    l_err.append('Error: Halt instruction used twice')
+
             elif j[0][0]=="var":
                 continue
             elif j[0] in label_value:
