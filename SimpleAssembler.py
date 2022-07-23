@@ -1,6 +1,7 @@
 import sys
 
 #==============================================================================
+#DICTIONARIES AND LISTS
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
 ,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
 ,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
@@ -15,6 +16,10 @@ type_E=["jmp","jlt","jgt","je"]
 type_F=["hlt"]
 
 reg=["R0","R1","R2","R3","R4","R5","R6","FLAGS"]
+
+reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0"}
+#=========================================================================================================================
+#FUNCTIONS FOR ASSEMBLY CODE
 
 def A_add(to_read):
         binary_encoding=""
@@ -98,7 +103,7 @@ def C_move_R(to_read):
 def B_rs(to_encode):
     x=to_encode[2].split("$")
     for ch in range(1,len(x)):
-        #print("Value",type(x[ch]))
+       
         bnr = bin(int(x[ch])).replace('0b','')
         #print(bnr)
         x = bnr[::-1] #this reverses an array
@@ -190,7 +195,32 @@ def F_hlt(to_encode):
     return binary_encoding
 
 #====================================================================================================================================
+#FUNCTIONS FOR SIMULATOR
 
+def simulator_add(y):
+    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+        if y[-7:-10:-1][::-1] in op_code.values():
+            for i in op_code.keys():
+                if op_code[i]==y[-7:-10:-1][::-1]:
+        
+                    temp_sum_1=int(reg_val[i])
+                    #print(reg_val[i]) #value stored in  register in dict reg_value
+                if op_code[i]==y[-4:-7:-1][::-1]:
+                
+                    temp_sum_2=int(reg_val[i])
+                
+                def sim_sum(temp_sum_1,temp_sum_2):
+                    return temp_sum_1+temp_sum_2
+    new_dict_val=sim_sum(temp_sum_1,temp_sum_2)
+    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+        if y[-1:-4:-1][::-1] in op_code.values():
+            for i in op_code.keys():
+                if op_code[i]==y[-1:-4:-1][::-1]:
+                    reg_val[i]=new_dict_val                   #format(new_dict_val,"016b")
+    #print(reg_val)
+
+
+#====================================================================================================================================
 asi=[]
 L=[]
 
