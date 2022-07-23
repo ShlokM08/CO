@@ -1,18 +1,3 @@
-
-
-
-
-
-
-#=====================================================================================================================
-def temp_add(s):
-    x=bin(int(s[-7:-10:-1][::-1],2)+int(s[-4:-7:-1][::-1],2))
-    return x[2:]
-
-#=====================================================================================================================
-
-
-
 #=====================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
 ,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
@@ -23,10 +8,10 @@ reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":
 '''x=["mov","R1","10"]
 z=["mov","R2","20"]'''
 #=====================================================================================================================
-y="1000000001010011"
+y="1110000001010011"
 #=====================================================================================================================
-def simulator_add(y):
-    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+def simulator_and(y):
+    if y[0:5] =="11100": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-7:-10:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-7:-10:-1][::-1]:
@@ -37,31 +22,17 @@ def simulator_add(y):
                 
                     temp_sum_2=int(reg_val[i])
                 
-                def sim_sum(temp_sum_1,temp_sum_2):
-                    return temp_sum_1+temp_sum_2
-    new_dict_val=sim_sum(temp_sum_1,temp_sum_2)
-    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+                def sim_and(temp_sum_1,temp_sum_2):
+                    if temp_sum_1>temp_sum_2:
+                        return temp_sum_1
+                    elif temp_sum_2>temp_sum_1:
+                        return temp_sum_2
+    new_dict_val=sim_and(temp_sum_1,temp_sum_2)
+    if y[0:5] =="11100": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-1:-4:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-1:-4:-1][::-1]:
                     reg_val[i]=new_dict_val                   #format(new_dict_val,"016b")
-    #print(reg_val)
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+simulator_and(y)
+print(reg_val)
