@@ -8,30 +8,35 @@ reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":
 '''x=["mov","R1","10"]
 z=["mov","R2","20"]'''
 #=====================================================================================================================
-y="1001100000001011"
+y="1100100100000101"
 #=====================================================================================================================
-def simulator_mov_r(y):
-    if y[0:5] =="10011": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+def simulator_left_shift(y):
+    if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-7:-10:-1][::-1] in op_code.values():
             for i in op_code.keys():
-                if op_code[i]==y[-7:-10:-1][::-1]:
-        
+                if op_code[i]==y[-9:-12:-1][::-1]:
+                    print(i)
+                    print(reg_val[i])
                     temp_sum_1=int(reg_val[i])
                     #print(reg_val[i]) #value stored in  register in dict reg_value
                 if op_code[i]==y[-4:-7:-1][::-1]:
+                    print(i)
+                    print(reg_val[i])
+                    #print(reg_val[i])
+
                 
                     temp_sum_2=int(reg_val[i])
                 
-                def sim_mov_r(temp_sum_1,temp_sum_2):
-                    temp_sum_1==temp_sum_2
-                    return temp_sum_2
-                   
-    new_dict_val=sim_mov_r(temp_sum_1,temp_sum_2)
-    if y[0:5] =="10011": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+                def sim_left_shift(temp_sum_1,temp_sum_2):
+                    #import numpy as np
+                    x=temp_sum_1<<temp_sum_2
+                    return x
+    new_dict_val=sim_left_shift(temp_sum_1,temp_sum_2)
+    if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-1:-4:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-1:-4:-1][::-1]:
                     reg_val[i]=new_dict_val                   #format(new_dict_val,"016b")
 
-simulator_mov_r(y)
+simulator_left_shift(y)
 print(reg_val)
