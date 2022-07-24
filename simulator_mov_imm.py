@@ -21,6 +21,6 @@ def simulator_mov_im(y):
                 bin_to_dec=bin_to_dec*2 +int(num)
             return bin_to_dec
 
-        reg1_val=binarytodec
-        reg_val[reg1_k]=reg1_val
-        return reg1_val
+    reg1_val=binarytodec(value)
+    reg_val[reg1_k]=reg1_val
+    return reg_val

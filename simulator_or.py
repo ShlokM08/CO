@@ -7,7 +7,7 @@ reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":
 
 
 def simulator_or(y):
-    opcode = y[0:5]
+    op_code = y[0:5]
     register1 = y[7:10]
     register2 = y[10:13]
     register3 = y[13:16]
