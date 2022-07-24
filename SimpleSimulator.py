@@ -230,6 +230,15 @@ def simulator_cmp(y):
         reg_val['FLAGS'][2]=1
     elif int(reg_val[r1])==int(reg_val[r2]):
         reg_val['FLAGS'][3]=1
+
+def bin_to_dec(temp_sum_2):
+                    binary = temp_sum_2
+                    decimal = 0
+                    for digit in binary:
+                        decimal= decimal*2 + int(digit)
+                    return decimal
+
+
 #===============================================================================================================================
 #===============================================================================================================================
 #MASTER CODE
@@ -238,35 +247,59 @@ input_elements=[]
 asii=[]
 for line in sys.stdin:
     asii.append(line.rstrip())
-
-
 for line in asii:
     if line!='':
         input_elements.append(line)
-
-for elements in input_elements:
-    if elements[0:5]=="10000":
-        simulator_add(elements)#
-    elif elements[0:5]=="11100":
-        simulator_and(elements)#
-    elif elements[0:5]=="10111":
-        simulator_div(elements)#
-    elif elements[0:5]=="11001":
-        simulator_left_shift(elements)#
-    elif elements[0:5]=="10011":
-        simulator_mov_r(elements)#
-    elif elements[0:5]=="10110":
-        simulator_mul(elements)#
-    elif elements[0:5]=="11101":
-        simulator_not(elements)#
-    elif elements[0:5]=="10101":
-        simulator_str(elements,mem_addr)#
-    elif elements[0:5]=="10001":
-        simulator_sub(elements)#
-    elif elements[0:5]=="11010":
-        simulator_xor(elements)#
-    elif elements[0:5]=="10100":
-        simulator_ld(elements)#
+total_line=len(input_elements)
+def simulator_jgt(y):
+    mem=y[8:16]
+    if reg_val['FLAGS'][2]==1:
+        c=bin_to_dec(mem)
+    line_num=input_elements[c-1]
+    return line_num
+def simulator_jmp(y):
+    mem=y[8:16]
+    c=bin_to_dec(mem)
+    line_num=input_elements[c-1]
+    return line_num
+def simulator_jlt(y):
+    mem=y[8:16]
+    if reg_val['FLAGS'][1]==1:
+        c=bin_to_dec(mem)
+    line_num=input_elements[c-1]
+    return line_num
+def simulator_je(y):
+    mem=y[8:16]
+    if reg_val['FLAGS'][3]==1:
+        c=bin_to_dec(mem)
+    line_num=input_elements[c-1]
+    return line_num
+current=0
+while True:
+    if input_elements[current][0:5]=="10000":
+        simulator_add(input_elements[current])#
+    elif input_elements[current][0:5]=="11100":
+        simulator_and(input_elements[current])#
+    elif input_elements[current][0:5]=="10111":
+        simulator_div(input_elements[current])#
+    elif input_elements[current][0:5]=="11001":
+        simulator_left_shift(input_elements[current])#
+    elif input_elements[current][0:5]=="10011":
+        simulator_mov_r(input_elements[current])#
+    elif input_elements[current][0:5]=="10110":
+        simulator_mul(input_elements[current])#
+    elif input_elements[current][0:5]=="11101":
+        simulator_not(input_elements[current])#
+    elif input_elements[current][0:5]=="10101":
+        simulator_str(input_elements[current],mem_addr)#
+    elif input_elements[current][0:5]=="10001":
+        simulator_sub(input_elements[current])#
+    elif input_elements[current][0:5]=="11010":
+        simulator_xor(input_elements[current])#
+    elif input_elements[current][0:5]=="10100":
+        simulator_ld(input_elements[current])#
     else:
         print("Invalid Instruction")
         break
+    current+=1
+    
