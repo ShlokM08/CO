@@ -15,7 +15,7 @@ z=["mov","R2","20"]'''
 y="1000000001010011"
 #=====================================================================================================================
 def simulator_add(y):
-    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+    #if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-7:-10:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-7:-10:-1][::-1]:
@@ -28,8 +28,8 @@ def simulator_add(y):
                 
                 def sim_sum(temp_sum_1,temp_sum_2):
                     return temp_sum_1+temp_sum_2
-    new_dict_val=sim_sum(temp_sum_1,temp_sum_2)
-    if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+        new_dict_val=sim_sum(temp_sum_1,temp_sum_2)
+    #if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-1:-4:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-1:-4:-1][::-1]:
