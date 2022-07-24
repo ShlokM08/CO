@@ -275,6 +275,8 @@ def simulator_je(y):
     line_num=input_elements[c-1]
     return line_num
 current=0
+simulator=[]
+s=''
 while True:
     if input_elements[current][0:5]=="10000":
         simulator_add(input_elements[current])#
@@ -301,5 +303,8 @@ while True:
     else:
         print("Invalid Instruction")
         break
+    s+=format(current,'08b')+''*8+format(reg_val['R0'],'016b')+''*8+format(reg_val['R1'],'016b')+''*8+format(reg_val['R2'],'016b')+''*8+format(reg_val['R3'],'016b')+''*8+format(reg_val['R4'],'016b')+''*8+format(reg_val['R5'],'016b')+''*8+format(reg_val['R6'],'016b')+''*8+format(reg_val['FLAGS'],'016b')
+    simulator.append(s)
     current+=1
-    
+for line in simulator:
+    print(line)
