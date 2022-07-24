@@ -6,7 +6,7 @@ op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100
 ,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
 "R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
 #=====================================================================================================================
-reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0"}
+reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0000"}
 #===============================================================================================================================
 mem_addr={}
 #=====================================================================================================================
@@ -27,6 +27,9 @@ def simulator_add(y):
                 def sim_sum(temp_sum_1,temp_sum_2):
                     return temp_sum_1+temp_sum_2
         new_dict_val=sim_sum(temp_sum_1,temp_sum_2)
+        if new_dict_val>(2**16)-1:
+            reg_val['FLAGS'][0]=1
+            return 'Overflow'
     #if y[0:5] =="10000": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-1:-4:-1][::-1] in op_code.values():
             for i in op_code.keys():
@@ -148,6 +151,9 @@ def simulator_mul(y):
             r3_val=int(reg_val[i])
             r3_k=i
     r3_val=r1_val*r2_val
+    if r3_val>(2**16)-1:
+        reg_val['FLAGS'][0]=1
+        return 'Overflow'
     reg_val[r3_k]=r3_val
     return r3_val
 #===============================================================================================================================
@@ -186,6 +192,9 @@ def simulator_sub(y):
                 def sim_sub(temp_sum_1,temp_sum_2):
                     return temp_sum_1-temp_sum_2
     new_dict_val=sim_sub(temp_sum_1,temp_sum_2)
+    if len(bin(new_dict_val))>len(bin(65535)):
+        reg_val['FLAGS'][0]=1
+        return 'Overflow'
     if y[0:5] =="10001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-1:-4:-1][::-1] in op_code.values():
             for i in op_code.keys():
@@ -207,6 +216,20 @@ def simulator_xor(y):
     r3_val=r1_val^r2_val
     reg_val[r3_k]=r3_val
     return r3_val
+def simulator_cmp(y):
+    r1_ad=y[10:13]
+    r2_ad=y[13:16]
+    for i in op_code:
+        if op_code[i]==r1_ad:
+            r1=i
+        elif op_code[i]==r2_ad:
+            r2=i
+    if int(reg_val[r1])<int(reg_val[r2]):
+        reg_val['FLAGS'][1]=1
+    elif int(reg_val[r1])>int(reg_val[r2]):
+        reg_val['FLAGS'][2]=1
+    elif int(reg_val[r1])==int(reg_val[r2]):
+        reg_val['FLAGS'][3]=1
 #===============================================================================================================================
 #===============================================================================================================================
 #MASTER CODE
