@@ -15,28 +15,28 @@ def simulator_left_shift(y):
         if y[-7:-10:-1][::-1] in op_code.values():
             for i in op_code.keys():
                 if op_code[i]==y[-9:-12:-1][::-1]:
-                    print(i)
-                    print(reg_val[i])
                     temp_sum_1=int(reg_val[i])
                     #print(reg_val[i]) #value stored in  register in dict reg_value
-                if op_code[i]==y[-4:-7:-1][::-1]:
-                    print(i)
-                    print(reg_val[i])
-                    #print(reg_val[i])
+                temp_sum_2=y[-1:-9:-1][::-1]
 
+                def bin_to_dec(temp_sum_2):
+                    binary = temp_sum_2
+                    decimal = 0
+                    for digit in binary:
+                        decimal= decimal*2 + int(digit)
+                    return decimal
+    
+            bin_val_temp2=bin_to_dec(temp_sum_2)                 
+            def sim_left_shift(bin_val_temp2,temp_sum_1):
+                print(bin_val_temp2,temp_sum_1)
+                x=int(bin_val_temp2)<<temp_sum_1
+                return x
                 
-                    temp_sum_2=int(reg_val[i])
-                
-                def sim_left_shift(temp_sum_1,temp_sum_2):
-                    #import numpy as np
-                    x=temp_sum_1<<temp_sum_2
-                    return x
-    new_dict_val=sim_left_shift(temp_sum_1,temp_sum_2)
-    if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
-        if y[-1:-4:-1][::-1] in op_code.values():
-            for i in op_code.keys():
-                if op_code[i]==y[-1:-4:-1][::-1]:
-                    reg_val[i]=new_dict_val                   #format(new_dict_val,"016b")
+        new_dict_val=sim_left_shift(bin_val_temp2,temp_sum_1)
+        for i in op_code.keys():
+            if op_code[i]==y[-9:-12:-1][::-1]:
+                reg_val[i]=new_dict_val
+               
 
 simulator_left_shift(y)
 print(reg_val)
