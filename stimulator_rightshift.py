@@ -9,7 +9,7 @@ z=["mov","R2","20"]'''
 #=====================================================================================================================
 y="1100100100000101"
 #=====================================================================================================================
-def simulator_left_shift(y):
+def simulator_right_shift(y):
     if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
         if y[-7:-10:-1][::-1] in op_code.values():
             for i in op_code.keys():
@@ -26,16 +26,16 @@ def simulator_left_shift(y):
                     return decimal
     
             bin_val_temp2=bin_to_dec(temp_sum_2)                 
-            def sim_left_shift(bin_val_temp2,temp_sum_1):
+            def sim_right_shift(bin_val_temp2,temp_sum_1):
                 print(bin_val_temp2,temp_sum_1)
                 x=int(bin_val_temp2)>>temp_sum_1
                 return x
                 
-        new_dict_val=sim_left_shift(bin_val_temp2,temp_sum_1)
+        new_dict_val=sim_right_shift(bin_val_temp2,temp_sum_1)
         for i in op_code.keys():
             if op_code[i]==y[-9:-12:-1][::-1]:
                 reg_val[i]=new_dict_val
                
 
-simulator_left_shift(y)
+simulator_right_shift(y)
 print(reg_val)
