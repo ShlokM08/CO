@@ -238,7 +238,72 @@ def bin_to_dec(temp_sum_2):
                         decimal= decimal*2 + int(digit)
                     return decimal
 
+def simulator_mov_im(y):
+    reg1=y[5:8:]
+    value=y[8::]
+    for i in op_code:
+        if op_code[i]==reg1:
+            reg1_val=int(reg_val[i])
+            reg1_k=i
 
+        def binarytodec(value):
+            binary=value
+            bin_to_dec=0
+            for num in binary:
+                bin_to_dec=bin_to_dec*2 +int(num)
+            return bin_to_dec
+
+    reg1_val=binarytodec(value)
+    reg_val[reg1_k]=reg1_val
+    return reg_val
+
+def simulator_right_shift(y):
+    if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
+        if y[-7:-10:-1][::-1] in op_code.values():
+            for i in op_code.keys():
+                if op_code[i]==y[-9:-12:-1][::-1]:
+                    temp_sum_1=int(reg_val[i])
+                    #print(reg_val[i]) #value stored in  register in dict reg_value
+                temp_sum_2=y[-1:-9:-1][::-1]
+
+                def bin_to_dec(temp_sum_2):
+                    binary = temp_sum_2
+                    decimal = 0
+                    for digit in binary:
+                        decimal= decimal*2 + int(digit)
+                    return decimal
+    
+            bin_val_temp2=bin_to_dec(temp_sum_2)                 
+            def sim_right_shift(bin_val_temp2,temp_sum_1):
+                print(bin_val_temp2,temp_sum_1)
+                x=int(bin_val_temp2)>>temp_sum_1
+                return x
+                
+        new_dict_val=sim_right_shift(bin_val_temp2,temp_sum_1)
+        for i in op_code.keys():
+            if op_code[i]==y[-9:-12:-1][::-1]:
+                reg_val[i]=new_dict_val
+
+def simulator_or(y):
+    register1 = y[7:10]
+    register2 = y[10:13]
+    register3 = y[13:16]
+    valR1 = 0
+    valR2 = 0
+    valR3 = 0
+    for each in op_code :
+        if(op_code[each] == register1):
+            valR1 = int(reg_val[each])
+        
+        if(op_code[each] == register2):
+            valR2 = int(reg_val[each])
+        
+        if (op_code[each]==register3):
+            R3 = each
+
+    valR3 = valR1 | valR2
+    reg_val[R3]=valR3
+    return valR3
 #===============================================================================================================================
 #===============================================================================================================================
 #MASTER CODE
@@ -300,6 +365,24 @@ while True:
         simulator_xor(input_elements[current])#
     elif input_elements[current][0:5]=="10100":
         simulator_ld(input_elements[current])#
+    elif input_elements[current][0:5]=="10010":
+        simulator_mov_im(input_elements[current])#
+    elif input_elements[current][0:5]=="11000":
+        simulator_right_shift(input_elements[current])#
+    elif input_elements[current][0:5]=="11011":
+        simulator_or(input_elements[current])#
+    elif input_elements[current][0:5]=="11110":
+        simulator_cmp(input_elements[current])#
+    elif input_elements[current][0:5]=="01101":
+        simulator_jgt(input_elements[current])#
+    elif input_elements[current][0:5]=="01111":
+        simulator_je(input_elements[current])#
+    elif input_elements[current][0:5]=="01100":
+        simulator_jlt(input_elements[current])#
+    elif input_elements[current][0:5]=="11111":
+        simulator_jmp(input_elements[current])#
+    elif input_elements[current][0:5]=="10101":
+        simulator_str(input_elements[current])#
     else:
         print("Invalid Instruction")
         break
