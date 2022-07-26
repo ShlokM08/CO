@@ -381,8 +381,6 @@ while True:
         simulator_jlt(input_elements[current])#
     elif input_elements[current][0:5]=="11111":
         simulator_jmp(input_elements[current])#
-    elif input_elements[current][0:5]=="10101":
-        simulator_str(input_elements[current])#
     else:
         print("Invalid Instruction")
         break
