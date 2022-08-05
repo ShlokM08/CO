@@ -6,7 +6,7 @@ op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100
 ,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
 "R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
 #=====================================================================================================================
-reg_val={"R0":"0","R1":"0","R2":"0","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0000"}
+reg_val={"R0":"0","R1":"0","R2":"0","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":["0","0","0","0"]}
 #===============================================================================================================================
 mem_addr={}
 #=====================================================================================================================
@@ -385,7 +385,8 @@ while True:
     '''else:
         print("Invalid Instruction")
         break'''
-    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
+    flg=reg_val["FLAGS"][0]+reg_val["FLAGS"][1]+reg_val["FLAGS"][2]+reg_val["FLAGS"][3]
+    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(flg),'016b')
     simulator.append(s)
     if input_elements[current][0:5]=='01010':
         break
