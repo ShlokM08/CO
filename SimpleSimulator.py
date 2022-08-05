@@ -6,7 +6,7 @@ op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100
 ,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
 "R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
 #=====================================================================================================================
-reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0000"}
+reg_val={"R0":"0","R1":"0","R2":"0","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0000"}
 #===============================================================================================================================
 mem_addr={}
 #=====================================================================================================================
@@ -343,6 +343,7 @@ current=0
 simulator=[]
 s=''
 while True:
+    s=''
     if input_elements[current][0:5]=="10000":
         simulator_add(input_elements[current])#
     elif input_elements[current][0:5]=="11100":
@@ -381,14 +382,17 @@ while True:
         simulator_jlt(input_elements[current])#
     elif input_elements[current][0:5]=="11111":
         simulator_jmp(input_elements[current])#
-    else:
+    '''else:
         print("Invalid Instruction")
-        break
-    s+=format(current,'08b')+''*8+format(reg_val['R0'],'016b')+''*8+format(reg_val['R1'],'016b')+''*8+format(reg_val['R2'],'016b')+''*8+format(reg_val['R3'],'016b')+''*8+format(reg_val['R4'],'016b')+''*8+format(reg_val['R5'],'016b')+''*8+format(reg_val['R6'],'016b')+''*8+format(reg_val['FLAGS'],'016b')
+        break'''
+    s+=format(int(current),'08b')+' '*8+format(int(reg_val['R0']),'016b')+' '*8+format(int(reg_val['R1']),'016b')+' '*8+format(int(reg_val['R2']),'016b')+' '*8+format(int(reg_val['R3']),'016b')+' '*8+format(int(reg_val['R4']),'016b')+' '*8+format(int(reg_val['R5']),'016b')+' '*8+format(int(reg_val['R6']),'016b')+' '*8+format(int(reg_val['FLAGS']),'016b')
     simulator.append(s)
+    if input_elements[current][0:5]=='01010':
+        break
     current+=1
 for line in simulator:
     print(line)
 for line in input_elements:
     print(line)
-print('0'*(256-len(input_elements)))
+for i in range(256-len(input_elements)):
+    print("0"*16)
