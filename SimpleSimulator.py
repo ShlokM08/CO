@@ -73,7 +73,7 @@ def simulator_div(y):
     reg_val['R0']=int(r3/r4)
     reg_val['R1']=r3-(int(r3/r4)*r4)
     return reg_val['R0'], reg_val['R1']
-print(simulator_div('1011100000011100'))
+
 #===============================================================================================================================
 def simulator_left_shift(y):
     if y[0:5] =="11001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
@@ -389,3 +389,6 @@ while True:
     current+=1
 for line in simulator:
     print(line)
+for line in input_elements:
+    print(line)
+print('0'*(256-len(input_elements)))
