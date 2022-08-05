@@ -385,7 +385,7 @@ while True:
     '''else:
         print("Invalid Instruction")
         break'''
-    s+=format(int(current),'08b')+' '*8+format(int(reg_val['R0']),'016b')+' '*8+format(int(reg_val['R1']),'016b')+' '*8+format(int(reg_val['R2']),'016b')+' '*8+format(int(reg_val['R3']),'016b')+' '*8+format(int(reg_val['R4']),'016b')+' '*8+format(int(reg_val['R5']),'016b')+' '*8+format(int(reg_val['R6']),'016b')+' '*8+format(int(reg_val['FLAGS']),'016b')
+    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
     simulator.append(s)
     if input_elements[current][0:5]=='01010':
         break
