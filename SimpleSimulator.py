@@ -320,7 +320,7 @@ def simulator_jgt(y):
     mem=y[8:16]
     if reg_val['FLAGS']=='0010':
         c=bin_to_dec(mem)
-    line_num=input_elements[c-1]
+        line_num=input_elements[c-1]
     return line_num
 def simulator_jmp(y):
     mem=y[8:16]
@@ -390,7 +390,7 @@ while True:
     if input_elements[current][0:5]=='01010':
         break
     current+=1
-    reg_val['FLAGS']='0000'
+    #reg_val['FLAGS']='0000'
 for line in simulator:
     print(line)
 for line in input_elements:
