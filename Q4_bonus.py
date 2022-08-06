@@ -1,4 +1,4 @@
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import sys
 #=====================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
