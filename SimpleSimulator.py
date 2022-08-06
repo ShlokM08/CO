@@ -380,29 +380,17 @@ while True:
         simulator_cmp(input_elements[current])#
         found=1
     elif input_elements[current][0:5]=="01101":
-        try:
-            simulator_jgt(input_elements[current])#
-            current=input_elements.index(simulator_jgt(input_elements[current]))-1
-        except:
-            continue
+        simulator_jgt(input_elements[current])#
+        
     elif input_elements[current][0:5]=="01111":
-        try:
-            simulator_je(input_elements[current])#
-            current=input_elements.index(simulator_je(input_elements[current]))-1
-        except:
-            continue
+        simulator_je(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="01100":
-        try:
-            simulator_jlt(input_elements[current])#
-            current=input_elements.index(simulator_jlt(input_elements[current]))-1
-        except:
-            continue
+        simulator_jlt(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="11111":
-        try:
-            simulator_jmp(input_elements[current])#
-            current=input_elements.index(simulator_jmp(input_elements[current]))-1
-        except:
-            continue
+        simulator_jmp(input_elements[current])#
+        found=1
     '''else:
         print("Invalid Instruction")
         break'''
