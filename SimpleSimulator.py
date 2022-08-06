@@ -342,7 +342,9 @@ def simulator_je(y):
 current=0
 simulator=[]
 s=''
+stck=[]
 while True:
+    found=0
     s=''
     if input_elements[current][0:5]=="10000":
         simulator_add(input_elements[current])#
@@ -354,8 +356,6 @@ while True:
         simulator_left_shift(input_elements[current])#
     elif input_elements[current][0:5]=="10011":
         simulator_mov_r(input_elements[current])#
-        if input_elements[current][10:13]=='111':
-            reg_val['FLAGS']='0000'
     elif input_elements[current][0:5]=="10110":
         simulator_mul(input_elements[current])#
     elif input_elements[current][0:5]=="11101":
@@ -376,22 +376,35 @@ while True:
         simulator_or(input_elements[current])#
     elif input_elements[current][0:5]=="11110":
         simulator_cmp(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="01101":
         simulator_jgt(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="01111":
         simulator_je(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="01100":
         simulator_jlt(input_elements[current])#
+        found=1
     elif input_elements[current][0:5]=="11111":
         simulator_jmp(input_elements[current])#
+        found=1
     '''else:
         print("Invalid Instruction")
         break'''
-    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
+    stck.append(reg_val['FLAGS'])
+    x=stck.pop()
+    if x=='0000' or x=='':
+        s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
+    else:
+        s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(x),'016b')
+
     simulator.append(s)
-    current+=1
+    reg_val['FLAGS']='0000'
     if input_elements[current][0:5]=='01010':
         break
+    current+=1
+
 for line in simulator:
     print(line)
 for line in input_elements:
