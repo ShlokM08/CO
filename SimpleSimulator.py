@@ -380,21 +380,34 @@ while True:
         simulator_cmp(input_elements[current])#
         found=1
     elif input_elements[current][0:5]=="01101":
-        simulator_jgt(input_elements[current])#
-        found=1
+        try:
+            simulator_jgt(input_elements[current])#
+            current=input_elements.index(simulator_jgt(input_elements[current]))-1
+        except:
+            continue
     elif input_elements[current][0:5]=="01111":
-        simulator_je(input_elements[current])#
-        found=1
+        try:
+            simulator_je(input_elements[current])#
+            current=input_elements.index(simulator_je(input_elements[current]))-1
+        except:
+            continue
     elif input_elements[current][0:5]=="01100":
-        simulator_jlt(input_elements[current])#
-        found=1
+        try:
+            simulator_jlt(input_elements[current])#
+            current=input_elements.index(simulator_jlt(input_elements[current]))-1
+        except:
+            continue
     elif input_elements[current][0:5]=="11111":
-        simulator_jmp(input_elements[current])#
-        found=1
+        try:
+            simulator_jmp(input_elements[current])#
+            current=input_elements.index(simulator_jmp(input_elements[current]))-1
+        except:
+            continue
     '''else:
         print("Invalid Instruction")
         break'''
-    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
+    flg='0'*(12)+reg_val['FLAGS']
+    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+flg
     simulator.append(s)
     reg_val['FLAGS']='0000'
     if input_elements[current][0:5]=='01010':
