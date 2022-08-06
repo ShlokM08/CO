@@ -355,7 +355,7 @@ while True:
     elif input_elements[current][0:5]=="10011":
         simulator_mov_r(input_elements[current])#
         if input_elements[current][10:13]=='111':
-            reg_val['FLAGS']='000'
+            reg_val['FLAGS']='0000'
     elif input_elements[current][0:5]=="10110":
         simulator_mul(input_elements[current])#
     elif input_elements[current][0:5]=="11101":
