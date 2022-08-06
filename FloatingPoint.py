@@ -118,15 +118,17 @@ def B_movf_i(inp):
         fr=fr*2
     s+=num_bin
     i=s.index('.')
-    expo=format(int(len(s[1:i])), '03b')
-    mantissa=s[i+1:]
-    if len(mantissa)>3:
-        mantissa=mantissa[-1:-4]
-    elif len(mantissa)<3:
-        mantissa='0'*(3-len(mantissa))+mantissa
-    s=''
-    s=expo+mantissa
-    return s
+    if len(s[1:i])<=3:
+        expo=format(int(len(s[1:i])), '03b')
+        mantissa=s[i+1:]
+        if len(mantissa)>3:
+            mantissa=mantissa[-1:-4]
+        elif len(mantissa)<3:
+            mantissa='0'*(3-len(mantissa))+mantissa
+        s=''
+        s=expo+mantissa
+        return s
+    
 
 def C_move_R(to_read):
     binary_encoding=""
@@ -357,12 +359,16 @@ for j in l:
                             found=0
                             #print(A_add(j))
                             x=A_add(j)
-                            
-
+                            lst.append(x)
+                        elif j[0]=='addf' and found_error==0:
+                            x=A_addf(j)
                             lst.append(x)
                         elif j[0]=="sub" and found_error==0:
                             #print(A_sub(j))
                             x=A_sub(j)
+                            lst.append(x)
+                        elif j[0]=='subf' and found_error==0:
+                            x=A_subf(j)
                             lst.append(x)
                         elif j[0]=="mul" and found_error==0:
                             #print(A_mul(j))
@@ -406,6 +412,28 @@ for j in l:
                                 if found_error==0:
                                     #print(B_mov_i(j))
                                     x=B_mov_i(j)
+                                    lst.append(x)
+                            else: 
+                                print(f'Error: Illegal Immediate Value in line {c_op}')
+                                found_error=1
+                                l_err.append(f'Error: Illegal Immediate Value in line {c_op}')
+                        except: 
+                            print(f'Error: Illegal Immediate Value in line {c_op}')
+                            found_error=1
+                            l_err.append(f'Error: Illegal Immediate Value  in line {c_op}')
+                elif j[0]=="movf" :
+                    #print(keypresent(j))
+                    if '$' in j[2]:
+                        num=''
+                        for ch in j[2]:
+                            if ch!='$':
+                                num+=ch
+                        try:
+                            num=int(num)
+                            if num<256:
+                                if found_error==0:
+                                    #print(B_mov_i(j))
+                                    x=B_movf_i(j)
                                     lst.append(x)
                             else: 
                                 print(f'Error: Illegal Immediate Value in line {c_op}')
