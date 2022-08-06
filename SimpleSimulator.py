@@ -1,3 +1,4 @@
+from faulthandler import register
 import sys
 
 #=====================================================================================================================
@@ -230,7 +231,6 @@ def simulator_cmp(y):
         reg_val['FLAGS']='0010'
     elif int(reg_val[r1])==int(reg_val[r2]):
         reg_val['FLAGS']='0001'
-
 def bin_to_dec(temp_sum_2):
                     binary = temp_sum_2
                     decimal = 0
@@ -354,6 +354,8 @@ while True:
         simulator_left_shift(input_elements[current])#
     elif input_elements[current][0:5]=="10011":
         simulator_mov_r(input_elements[current])#
+        if input_elements[current][10:13]=='111':
+            reg_val['FLAGS']='000'
     elif input_elements[current][0:5]=="10110":
         simulator_mul(input_elements[current])#
     elif input_elements[current][0:5]=="11101":
@@ -387,10 +389,9 @@ while True:
         break'''
     s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
     simulator.append(s)
+    current+=1
     if input_elements[current][0:5]=='01010':
         break
-    current+=1
-    reg_val['FLAGS']='0000'
 for line in simulator:
     print(line)
 for line in input_elements:
