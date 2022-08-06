@@ -390,7 +390,7 @@ while True:
     if input_elements[current][0:5]=='01010':
         break
     current+=1
-    #reg_val['FLAGS']='0000'
+    reg_val['FLAGS']='0000'
 for line in simulator:
     print(line)
 for line in input_elements:
