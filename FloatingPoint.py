@@ -108,13 +108,24 @@ def B_movf_i(inp):
     q=int(num)
     fr=num-q
     num_bin=''
-    while num:
-        r=num%2
+    while q:
+        r=q%2
         num_bin+=str(r)
-        num=num//2
-    num_bin=num_bin[::-1]
-    
+        q=q//2
+    num_bin=num_bin[::-1]+'.'
+    while int(fr)!=1:
+        num_bin+=str(int(fr*2))
+        fr=fr*2
     s+=num_bin
+    i=s.index('.')
+    expo=format(int(len(s[1:i])), '03b')
+    mantissa=s[i+1:]
+    if len(mantissa)>3:
+        mantissa=mantissa[-1:-4]
+    elif len(mantissa)<3:
+        mantissa='0'*(3-len(mantissa))+mantissa
+    s=''
+    s=expo+mantissa
     return s
 
 def C_move_R(to_read):
