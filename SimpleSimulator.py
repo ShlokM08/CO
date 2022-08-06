@@ -400,5 +400,5 @@ for line in mem_addr:
     if mem_addr[line]!='0':
         print(format(int(mem_addr[line]),'016b'))
         c+=1
-for i in range(256-len(input_elements)):
+for i in range(256-len(input_elements)-c):
     print("0"*16)
