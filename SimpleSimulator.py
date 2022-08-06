@@ -410,13 +410,14 @@ while True:
             current=print(int(simulator_jmp(input_elements[current])))-2
         except:
             continue
+    elif input_elements[current][0:5]=='01010':
+        break
     
     flg='0'*(12)+reg_val['FLAGS']
     s+=format(int(PC),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+flg
     simulator.append(s)
     #reg_val['FLAGS']='0000'
-    if input_elements[current][0:5]=='01010':
-        break
+    
     current+=1
     PC+=1
 for line in simulator:
