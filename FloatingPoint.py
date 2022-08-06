@@ -2,7 +2,7 @@ import sys
 
 #==============================================================================
 #DICTIONARIES AND LISTS
-op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
+op_code={"add":"10000","addf": "00000","sub":"10001","subf": "00001","mov_I":"10010","movf": "00010","mov_R":"10011","ld":"10100"
 ,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
 ,"and":"11100","not":"11101","cmp":"11110","jmp":"11111","jlt":"01100","jgt":"01101","je":"01111","hlt":"01010",
 "R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
@@ -20,6 +20,9 @@ reg=["R0","R1","R2","R3","R4","R5","R6","FLAGS"]
 reg_val={"R0":"0","R1":"6","R2":"2","R3":"0","R4":"0","R5":"0","R6":"0","FLAGS":"0"}
 #=========================================================================================================================
 #FUNCTIONS FOR ASSEMBLY CODE
+def A_addf(inst):
+    s=op_code['fadd']+unused['A']+op_code[inst[1]]+op_code[inst[2]]+op_code[inst[3]]
+    return s
 
 def A_add(to_read):
         binary_encoding=""
@@ -52,7 +55,9 @@ def A_sub(inp):
    
         s=op_code['sub']+unused["A"]+op_code[inp[1]]+op_code[inp[2]]+op_code[inp[3]]
         return s
-   
+def A_subf(inp):
+    s=op_code['subf']+unused["A"]+op_code[inp[1]]+op_code[inp[2]]+op_code[inp[3]]
+    return s  
 def A_xor(to_encode):
     binary_encoding=""
     if to_encode[0]=="xor":
@@ -90,6 +95,25 @@ def B_mov_i(inp):
     num_bin=num_bin[::-1]
     if len(num_bin)<8:
         num_bin='0'*(8-len(num_bin))+num_bin
+    s+=num_bin
+    return s
+
+def B_movf_i(inp):
+    s=op_code['movf']+op_code[inp[1]]
+    num=''
+    for ch in inp[2]:
+        if ch!='$':
+            num+=ch
+    num=float(num)
+    q=int(num)
+    fr=num-q
+    num_bin=''
+    while num:
+        r=num%2
+        num_bin+=str(r)
+        num=num//2
+    num_bin=num_bin[::-1]
+    
     s+=num_bin
     return s
 
