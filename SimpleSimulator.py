@@ -395,5 +395,10 @@ for line in simulator:
     print(line)
 for line in input_elements:
     print(line)
+c=0
+for line in mem_addr:
+    if mem_addr[line]!='0':
+        print(format(int(mem_addr[line]),'016b'))
+        c+=1
 for i in range(256-len(input_elements)):
     print("0"*16)
