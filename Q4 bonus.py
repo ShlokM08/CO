@@ -1,8 +1,5 @@
-from calendar import c
-from faulthandler import register
-import sys
 import matplotlib.pyplot as plt
-import numpy as np
+import sys
 #=====================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
 ,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
