@@ -1,6 +1,8 @@
+from calendar import c
 from faulthandler import register
 import sys
-
+import matplotlib.pyplot as plt
+import numpy as np
 #=====================================================================================================================
 op_code={"add":"10000","sub":"10001","mov_I":"10010","mov_R":"10011","ld":"10100"
 ,"st":"10101","mul":"10110","div":"10111","rs":"11000","ls":"11001","xor":"11010","or":"11011"
@@ -194,9 +196,6 @@ def simulator_sub(y):
                     return temp_sum_1-temp_sum_2
     new_dict_val=sim_sub(temp_sum_1,temp_sum_2)
     if len(bin(new_dict_val))>len(bin(65535)):
-        reg_val['FLAGS']='1000'
-        return 'Overflow'
-    elif new_dict_val<0:
         reg_val['FLAGS']='1000'
         return 'Overflow'
     if y[0:5] =="10001": #and int(y[-7:-10:-1][::-1],2) in op_code.values() and int(y[-4:-7:-1][::-1],2) in op_code.values():
@@ -412,14 +411,15 @@ while True:
         break
     current+=1
     PC+=1
-for line in simulator:
-    print(line)
-for line in input_elements:
-    print(line)
-c=0
-for line in mem_addr:
-    if mem_addr[line]!='0':
-        print(format(int(mem_addr[line]),'016b'))
-        c+=1
-for i in range(256-len(input_elements)-c):
-    print("0"*16)
+
+
+#scatter plot 
+
+x=PC
+y=input_elements
+
+plt.plot(x,y)
+plt.title("Memory Access Trace")
+plt.xlabel("Cycle value")
+plt.ylabel("Memory Address")
+plt.show()
