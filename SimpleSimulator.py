@@ -386,21 +386,30 @@ while True:
         found=1
     elif input_elements[current][0:5]=="01101":
         simulator_jgt(input_elements[current])#
-        current=print(int(simulator_jgt(input_elements[current])))-2
+        try:
+            current=print(int(simulator_jgt(input_elements[current])))-2
+        except:
+            continue
         
     elif input_elements[current][0:5]=="01111":
         simulator_je(input_elements[current])#
-        current=print(int(simulator_je(input_elements[current])))-2
-        found=1
+        try:
+            current=print(int(simulator_je(input_elements[current])))-2
+            found=1
+        except:
+            continue
     elif input_elements[current][0:5]=="01100":
         simulator_jlt(input_elements[current])#
-        current=print(int(simulator_jlt(input_elements[current])))-2
-        found=1
+        try:
+            current=print(int(simulator_jlt(input_elements[current])))-2
+        except:
+            continue
     elif input_elements[current][0:5]=="11111":
         simulator_jmp(input_elements[current])#
-        current=print(int(simulator_jmp(input_elements[current])))-2
-
-        found=1
+        try:
+            current=print(int(simulator_jmp(input_elements[current])))-2
+        except:
+            continue
     
     flg='0'*(12)+reg_val['FLAGS']
     s+=format(int(PC),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+flg
