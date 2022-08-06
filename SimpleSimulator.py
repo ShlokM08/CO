@@ -342,7 +342,6 @@ def simulator_je(y):
 current=0
 simulator=[]
 s=''
-stck=[]
 while True:
     found=0
     s=''
@@ -356,6 +355,9 @@ while True:
         simulator_left_shift(input_elements[current])#
     elif input_elements[current][0:5]=="10011":
         simulator_mov_r(input_elements[current])#
+        if input_elements[current][10:13]=='111':
+            reg_val['FLAGS']='0000'
+            found=1
     elif input_elements[current][0:5]=="10110":
         simulator_mul(input_elements[current])#
     elif input_elements[current][0:5]=="11101":
@@ -392,13 +394,7 @@ while True:
     '''else:
         print("Invalid Instruction")
         break'''
-    stck.append(reg_val['FLAGS'])
-    x=stck.pop()
-    if x=='0000' or x=='':
-        s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
-    else:
-        s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(x),'016b')
-
+    s+=format(int(current),'08b')+' '+format(int(reg_val['R0']),'016b')+' '+format(int(reg_val['R1']),'016b')+' '+format(int(reg_val['R2']),'016b')+' '+format(int(reg_val['R3']),'016b')+' '+format(int(reg_val['R4']),'016b')+' '+format(int(reg_val['R5']),'016b')+' '+format(int(reg_val['R6']),'016b')+' '+format(int(reg_val['FLAGS']),'016b')
     simulator.append(s)
     reg_val['FLAGS']='0000'
     if input_elements[current][0:5]=='01010':
