@@ -369,7 +369,7 @@ while True:
     elif input_elements[current][0:5]=="11010":
         simulator_xor(input_elements[current])#
     elif input_elements[current][0:5]=="10100":
-        simulator_ld(input_elements[current])#
+        simulator_ld(input_elements[current], mem_addr)#
     elif input_elements[current][0:5]=="10010":
         simulator_mov_im(input_elements[current])#
     elif input_elements[current][0:5]=="11000":
